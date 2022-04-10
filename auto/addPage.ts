@@ -55,7 +55,9 @@ function addPages(pages) {
   <router-view></router-view>
 </template>
 `
-      : `<template>${title}</template>
+      : `<template>
+  <div>${title}</div>
+</template>
 
 <script lang="ts" setup name="${page}"></script>
 

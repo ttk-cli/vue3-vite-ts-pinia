@@ -1,4 +1,6 @@
-<template>控制台</template>
+<template>
+  <div>控制台</div>
+</template>
 
 <script lang="ts" setup name="dashboard"></script>
 

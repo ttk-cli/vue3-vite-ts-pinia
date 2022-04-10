@@ -1,4 +1,6 @@
-<template>test2</template>
+<template>
+  <div>test2</div>
+</template>
 
 <script lang="ts" setup name="test2"></script>
 

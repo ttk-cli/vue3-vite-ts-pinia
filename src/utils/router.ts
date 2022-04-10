@@ -6,7 +6,6 @@ const modules = {
   views: import.meta.globEager('../views/**/index.vue'),
 }
 const arr: string[] = []
-console.log(modules)
 function setRoute(path = 'pages', routes: Array<RouteRecordRaw> = []) {
   // @ts-ignore
   const files = modules[path]

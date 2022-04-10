@@ -5,7 +5,6 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 // import { toLogin } from '@/link'
-console.log(routes)
 const router = createRouter({
   history: createWebHistory(),
   routes,
