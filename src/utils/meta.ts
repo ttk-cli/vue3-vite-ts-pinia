@@ -4,3 +4,5 @@ export const meta = {
   test1_1: { title: ['test1', 'test1_1'], icon: 'el-icon-s-order' },
   test2: { title: ['test2'], icon: 'el-icon-s-order' },
 }
+
+export type MetaType = keyof typeof meta

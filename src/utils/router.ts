@@ -1,13 +1,15 @@
-import { meta } from './meta'
+import { meta, MetaType } from './meta'
 import { RouteRecordRaw } from 'vue-router'
 
 const modules = {
   pages: import.meta.globEager('../pages/**/index.vue'),
   views: import.meta.globEager('../views/**/index.vue'),
 }
+
+type ModulesType = keyof typeof modules
+
 const arr: string[] = []
-function setRoute(path = 'pages', routes: Array<RouteRecordRaw> = []) {
-  // @ts-ignore
+function setRoute(path: ModulesType, routes: Array<RouteRecordRaw> = []): RouteRecordRaw[] {
   const files = modules[path]
   for (const key in files) {
     const name = key.slice(9, -10)
@@ -16,16 +18,15 @@ function setRoute(path = 'pages', routes: Array<RouteRecordRaw> = []) {
       path: getPath(name),
       name: getName(name),
       component: files[key].default,
-      children: [],
-      // @ts-ignore
+      children: [] as RouteRecordRaw[],
       meta: meta[getName(name)],
     }
     if (!pRoute) {
-      if (!name) obj.children = setRoute('views') as any
+      if (!name) obj.children = setRoute('views')
       routes.push(obj)
     } else {
-      const parent: any = routes.find((i) => i.name === pRoute)
-      parent.children.push(obj)
+      const parent = routes.find((i) => i.name === pRoute) as RouteRecordRaw
+      parent?.children?.push(obj)
     }
     arr.push(name)
   }
@@ -34,7 +35,7 @@ function setRoute(path = 'pages', routes: Array<RouteRecordRaw> = []) {
 
 function getName(name: string) {
   const i = name.lastIndexOf('/')
-  return i === -1 ? name : name.slice(i + 1)
+  return (i === -1 ? name : name.slice(i + 1)) as MetaType
 }
 
 function getPath(name: string) {
@@ -55,6 +56,6 @@ function getPath(name: string) {
   return i === 0 ? path : path.slice(i)
 }
 
-const routes = setRoute()
+const routes = setRoute('pages')
 
 export default routes
