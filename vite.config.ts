@@ -32,4 +32,25 @@ export default defineConfig({
     open: true, //自动打开
     base: './ ', //生产环境路径
   },
+  // 打包配置
+  build: {
+    target: 'modules', // 设置最终构建的浏览器兼容目标。modules:支持原生 ES 模块的浏览器
+    outDir: 'dist', // 指定输出路径
+    sourcemap: false, // 构建后是否生成 source map 文件
+    minify: 'terser', // 混淆器，terser构建后文件体积更小
+    cssCodeSplit: true, // 启用/禁用 CSS 代码拆分
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    }, // 去除 console debugger
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
+        assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+      },
+    }, // 将打包后的资源分开
+  },
 })
