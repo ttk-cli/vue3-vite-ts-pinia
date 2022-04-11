@@ -13,6 +13,7 @@
     "add": "node ./auto/addPage.ts"
   },
   "dependencies": {
+    "element-plus": "^2.1.9",
     "nprogress": "0.2.0",
     "pinia": "2.0.13",
     "pinia-plugin-persist": "1.0.0",

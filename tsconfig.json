@@ -10,11 +10,13 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "esModuleInterop": true,
+    "skipLibCheck": true, // 针对element-puls的ts打包校验
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "types": ["element-plus/global"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]

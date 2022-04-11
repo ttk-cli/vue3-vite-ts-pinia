@@ -5,6 +5,8 @@
   <div>name:{{ name }}</div>
   <div>fullName:{{ fullName }}</div>
   <div @click="updateName">updateName</div>
+  <el-button>I am ElButton</el-button>
+  <el-date-picker v-model="dateVal" type="date" placeholder="Pick a day" />
 </template>
 
 <script lang="ts" setup name="dashboard">
@@ -22,6 +24,8 @@ const { name, fullName } = storeToRefs(testStore)
 function updateName() {
   testStore.updateName('333')
 }
+
+const dateVal = ref(new Date())
 </script>
 
 <style lang="scss" scoped></style>

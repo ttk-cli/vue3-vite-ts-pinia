@@ -3,6 +3,7 @@ import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +16,7 @@ export default defineConfig({
     AutoImport({
       dts: 'src/auto-imports.d.ts', // 可以自定义文件生成的位置，默认是根目录下
       imports: ['vue', 'vue-router'],
+      resolvers: [ElementPlusResolver()],
     }),
     Components({
       // 指定组件位置，默认是src/components
@@ -24,6 +26,7 @@ export default defineConfig({
       extensions: ['vue'],
       // 配置文件生成位置
       dts: 'src/components.d.ts',
+      resolvers: [ElementPlusResolver()],
     }),
     vue(),
   ],
@@ -46,6 +49,11 @@ export default defineConfig({
       },
     }, // 去除 console debugger
     rollupOptions: {
+      manualChunks(id) {
+        if (id.includes('node_modules')) {
+          return id.toString().split('node_modules/')[1].split('/')[0].toString()
+        }
+      },
       output: {
         chunkFileNames: 'static/js/[name]-[hash].js',
         entryFileNames: 'static/js/[name]-[hash].js',
