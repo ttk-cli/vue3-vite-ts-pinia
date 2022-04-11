@@ -4,6 +4,8 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -26,9 +28,14 @@ export default defineConfig({
       extensions: ['vue'],
       // 配置文件生成位置
       dts: 'src/components.d.ts',
-      resolvers: [ElementPlusResolver()],
+      resolvers: [ElementPlusResolver(), IconsResolver()],
     }),
     vue(),
+    Icons({
+      defaultClass: 'icons',
+      // expiremental
+      autoInstall: true,
+    }),
   ],
   server: {
     port: 3000,
