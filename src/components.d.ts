@@ -4,9 +4,16 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Aside: typeof import('./components/layout/Aside.vue')['default']
+    ElAside: typeof import('element-plus/es')['ElAside']
+    ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
+    ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
+    ElHeader: typeof import('element-plus/es')['ElHeader']
+    ElMain: typeof import('element-plus/es')['ElMain']
+    Header: typeof import('./components/layout/Header.vue')['default']
   }
 }
 

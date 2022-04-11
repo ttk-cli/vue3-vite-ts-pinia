@@ -7,6 +7,7 @@
   <div @click="updateName">updateName</div>
   <el-button>I am ElButton</el-button>
   <el-date-picker v-model="dateVal" type="date" placeholder="Pick a day" />
+  <div v-for="i in 50" :key="i">test</div>
 </template>
 
 <script lang="ts" setup name="dashboard">
