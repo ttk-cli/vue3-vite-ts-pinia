@@ -14,8 +14,7 @@ declare module 'vue' {
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElMain: typeof import('element-plus/es')['ElMain']
     Header: typeof import('./components/layout/Header.vue')['default']
-    IFoundationIndentLess: typeof import('~icons/foundation/indent-less')['default']
-    IFoundationIndentMore: typeof import('~icons/foundation/indent-more')['default']
+    Icon: typeof import('./components/base/Icon.vue')['default']
   }
 }
 

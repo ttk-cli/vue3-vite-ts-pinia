@@ -4,10 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
 import Unocss from 'unocss/vite'
-import unocssOptions from './unocssOptions'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -30,15 +27,10 @@ export default defineConfig({
       extensions: ['vue'],
       // 配置文件生成位置
       dts: 'src/components.d.ts',
-      resolvers: [ElementPlusResolver(), IconsResolver()],
+      resolvers: [ElementPlusResolver()],
     }),
     vue(),
-    Icons({
-      defaultClass: 'icons',
-      // expiremental
-      autoInstall: true,
-    }),
-    Unocss(unocssOptions),
+    Unocss(),
   ],
   server: {
     port: 3000,
@@ -47,6 +39,9 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['vue', 'vue-router'],
+  },
+  css: {
+    preprocessorOptions: { scss: { charset: false } },
   },
   // 打包配置
   build: {

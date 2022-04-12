@@ -7,8 +7,7 @@
   <div @click="updateName">updateName</div>
   <el-button class="m10 w200 br10 c-#387">I am ElButton</el-button>
   <el-date-picker v-model="dateVal" type="date" placeholder="Pick a day" />
-  <i-foundation-indent-more />
-  <i-foundation-indent-less :style="{ color: '#000', fontSize: '28px' }" />
+  <Icon v-for="icon in icons" :key="icon" :icon="icon" />
   <div v-for="i in 50" :key="i">test</div>
 </template>
 
@@ -29,6 +28,8 @@ function updateName() {
 }
 
 const dateVal = ref(new Date())
+
+const icons = ['foundation-indent-more', 'foundation-indent-less', '']
 </script>
 
 <style lang="scss" scoped></style>

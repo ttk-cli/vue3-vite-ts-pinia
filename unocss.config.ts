@@ -1,4 +1,4 @@
-import { VitePluginConfig } from 'unocss/vite'
+import { defineConfig, presetUno, presetAttributify, presetIcons, Rule } from 'unocss'
 // https://github.com/unocss/unocss
 
 const sizeMapping: Record<string, string> = {
@@ -18,13 +18,25 @@ const sizeMapping: Record<string, string> = {
   br: 'border-radius',
 }
 
-function getSizeRules(Mapping: Record<string, string>) {
+function getSizeRules(Mapping: Record<string, string>): Rule<{}>[] {
   return Object.keys(Mapping).map((key) => {
     const value = Mapping[key]
     return [new RegExp(`^${key}(\\d+)$`), ([, d]) => ({ [value]: `${d}px` })]
   })
 }
 
-export default {
-  rules: getSizeRules(sizeMapping),
-} as unknown as VitePluginConfig<{}>
+export const createConfig = () => {
+  return defineConfig({
+    presets: [
+      presetUno(),
+      presetAttributify(),
+      presetIcons({
+        prefix: '',
+        // autoInstall: true,
+      }),
+    ],
+    rules: getSizeRules(sizeMapping),
+  })
+}
+
+export default createConfig()
