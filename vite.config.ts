@@ -42,6 +42,9 @@ export default defineConfig({
     open: true, //自动打开
     base: './ ', //生产环境路径
   },
+  optimizeDeps: {
+    include: ['vue', 'vue-router'],
+  },
   // 打包配置
   build: {
     target: 'modules', // 设置最终构建的浏览器兼容目标。modules:支持原生 ES 模块的浏览器
