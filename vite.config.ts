@@ -6,6 +6,8 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import Unocss from 'unocss/vite'
+import unocssOptions from './unocssOptions'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,6 +38,7 @@ export default defineConfig({
       // expiremental
       autoInstall: true,
     }),
+    Unocss(unocssOptions),
   ],
   server: {
     port: 3000,

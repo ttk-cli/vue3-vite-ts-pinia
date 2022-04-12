@@ -7,6 +7,4 @@
 <script setup lang="ts">
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 </script>
-<style lang="scss">
-@import 'styles/index.scss';
-</style>
+<style lang="scss"></style>

@@ -43,7 +43,6 @@ module.exports = {
     ],
     'selector-type-no-unknown': [true, { ignoreTypes: ['page', 'radio', 'checkbox'] }],
     'number-leading-zero': 'always',
-    'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }],
     'declaration-block-no-redundant-longhand-properties': null,
     'color-function-notation': 'legacy',
     'color-hex-case': 'lower',
