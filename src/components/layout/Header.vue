@@ -16,12 +16,15 @@
       </transition-group>
     </el-breadcrumb>
   </div>
-  <div class="logout">退出</div>
+  <div class="logout" @click="logout">退出</div>
 </template>
 
 <script setup lang="ts">
 import { useAppStore } from '@/store/app'
 import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store/user'
+
+const { logout } = useUserStore()
 
 const appStore = useAppStore()
 const { isCollapse } = storeToRefs(appStore)

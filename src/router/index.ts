@@ -1,3 +1,4 @@
+import { useUserStore } from '@/store/user'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from '@/utils/router'
 // 进度条
@@ -12,15 +13,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  // if (to.path === '/login') return toLogin()
-  // const { path, query } = to
-  // if (query.token) {
-  //   sessionStorage.setItem('gys-token', query.token as string)
-  //   delete query.token
-  //   return next({ path, query })
-  // }
-  // const token = sessionStorage.getItem('gys-token')
-  // if (!token) return next('/login')
+  if (to.path === '/login') return next()
+  const { logged } = useUserStore()
+  if (!logged) return next('/login')
   next()
 })
 

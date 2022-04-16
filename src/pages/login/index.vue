@@ -1,5 +1,16 @@
 <template>
-  <div>login</div>
+  <div @click="login">login</div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useUserStore } from '@/store/user'
+const { setUserInfo } = useUserStore()
+const router = useRouter()
+async function login() {
+  await setUserInfo({
+    name: 'admin',
+    token: 'admin',
+  })
+  router.push('/')
+}
+</script>
