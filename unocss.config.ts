@@ -35,6 +35,7 @@ export const createConfig = () => {
         // autoInstall: true,
       }),
     ],
+    include: [/\.vue$/, /pages.json?$/],
     rules: getSizeRules(sizeMapping),
   })
 }

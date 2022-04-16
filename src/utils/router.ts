@@ -1,12 +1,13 @@
-import { meta, MetaType } from './meta'
+import meta from '../pages.json'
 import { RouteRecordRaw } from 'vue-router'
+
+type MetaType = keyof typeof meta
+type ModulesType = keyof typeof modules
 
 const modules = {
   pages: import.meta.globEager('../pages/**/index.vue'),
   views: import.meta.globEager('../views/**/index.vue'),
 }
-
-type ModulesType = keyof typeof modules
 
 const arr: string[] = []
 function setRoute(path: ModulesType, routes: Array<RouteRecordRaw> = []): RouteRecordRaw[] {

@@ -1,16 +1,23 @@
 <template>
-  <div :class="[...size, icon || 'carbon-unknown']"></div>
+  <div :class="className"></div>
 </template>
 
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   icon: {
     type: String,
   },
-  size: {
-    type: Array,
-    default: ['w40', 'h40'],
+  w: {
+    type: String,
   },
+  h: {
+    type: String,
+  },
+})
+
+const className = computed(() => {
+  const { icon, w, h } = props
+  return ['icon', w, h, icon || 'carbon:unknown']
 })
 </script>
 

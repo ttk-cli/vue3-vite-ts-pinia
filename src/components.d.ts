@@ -2,7 +2,7 @@
 // We suggest you to commit this file into source control
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
-declare module 'vue' {
+declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Aside: typeof import('./components/layout/Aside.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
@@ -13,8 +13,14 @@ declare module 'vue' {
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElMain: typeof import('element-plus/es')['ElMain']
+    ElMenu: typeof import('element-plus/es')['ElMenu']
+    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     Header: typeof import('./components/layout/Header.vue')['default']
     Icon: typeof import('./components/base/Icon.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
   }
 }
 

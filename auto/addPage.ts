@@ -1,17 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-// 获取菜单配置
-const metaPath = './src/utils/meta.ts'
-const metaStr = fs
-  .readFileSync(metaPath, 'utf-8')
-  .replace(/\s/g, '')
-  .match(/{.*},}/g)[0]
-  .replace(/},}/g, '}}')
-  .replace(/[a-zA-Z0-9_]*:/g, (i) => '"' + i.slice(0, -1) + '":')
-  .replace(/'/g, '"')
-
-const metaJson = JSON.parse(metaStr)
+const metaJson = require('../src/pages.json')
 const metaArr = Object.keys(metaJson)
 const filesList = readFileList('./src/views')
 const news = getNews(metaArr, filesList)

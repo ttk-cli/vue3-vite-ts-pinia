@@ -27,14 +27,6 @@ module.exports = {
   plugins: ['vue', '@typescript-eslint', 'prettier', 'import'],
   rules: {
     'vue/no-multiple-template-root': 'off', // 解决template中最顶层只能返回一个元素的检测报错
-    'import/extensions': [
-      // 其他文件可不加扩展，引入vue文件需要加
-      'error',
-      'never',
-      {
-        vue: 'always', // 在ts中引入vue模块不加.vue后缀ts会找不到模块，这边验证vue文件的引用一定加.vue后缀
-      },
-    ], // 解决导入文件后缀问题
     'import/no-unresolved': [
       // 解决无法识别问题
       2,
@@ -177,6 +169,7 @@ module.exports = {
     defineEmits: 'readonly',
     defineExpose: 'readonly',
     withDefaults: 'readonly',
+    useRoute: 'readonly',
     useRouter: 'readonly',
   },
 }
