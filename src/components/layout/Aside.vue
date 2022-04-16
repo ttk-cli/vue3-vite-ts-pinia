@@ -32,35 +32,40 @@
 import router from '@/utils/router'
 import meta from '../../pages.json'
 import { lastItem } from '@/utils/shared'
+import { useAppStore } from '@/store/app'
+import { storeToRefs } from 'pinia'
+
 const route = useRoute()
-const isCollapse = false
 // 菜单
 const menus: any = computed(() => router[0].children?.filter((i) => i.meta))
+
+const appStore = useAppStore()
+const { isCollapse } = storeToRefs(appStore)
 </script>
 
 <style lang="scss" scoped>
 .el-menu {
   margin-top: 60px;
   border-right: 0;
+  width: 200px;
   &::before {
     position: fixed;
     top: 0;
     z-index: 10;
-    padding: 0 7px;
-    width: 205px;
+    padding: 0 10px;
+    width: 200px;
     height: 60px;
     background: #189f92;
     line-height: 60px;
     text-overflow: ellipsis;
-    text-align: center;
     font-size: 16px;
     color: #fff;
     white-space: nowrap;
-    content: 'VUE3 - ADMIN';
+    content: 'ADMIN - VUE3 - PINIA';
   }
 }
 .el-menu--collapse {
-  width: 64px;
+  width: 70px;
   &::before {
     content: 'ADMIN';
   }

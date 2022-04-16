@@ -1,9 +1,12 @@
 .el-aside {
   overflow: hidden;
+  width: auto;
   background: #304156;
 }
 .el-header {
   z-index: 10;
+  padding: 0;
+  height: 102px;
   background: #fff;
   box-shadow: 0 2px 2px #999;
 }
