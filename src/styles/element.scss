@@ -4,9 +4,11 @@
   background: #304156;
 }
 .el-header {
+  display: flex;
   z-index: 10;
+  justify-content: space-between;
+  align-items: center;
   padding: 0;
-  height: 102px;
   background: #fff;
   box-shadow: 0 2px 2px #999;
 }
