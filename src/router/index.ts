@@ -5,7 +5,6 @@ import routes from '@/utils/router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-// import { toLogin } from '@/link'
 const router = createRouter({
   history: createWebHistory(),
   routes,
@@ -22,5 +21,5 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   NProgress.done()
 })
-
+console.log(routes)
 export default router

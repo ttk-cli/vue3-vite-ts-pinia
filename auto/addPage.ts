@@ -42,7 +42,9 @@ function addPages(pages) {
     const { title, hasChild } = metaJson[page]
     const template = hasChild
       ? `<template>
-  <router-view></router-view>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 `
       : `<template>
