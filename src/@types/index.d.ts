@@ -1,10 +1,10 @@
-declare namespace Types {
-  type Query = {
-    replace?: boolean
-    [propName: string]: any
+declare namespace App {
+  type tab = {
+    title: string
+    name: string
   }
+  type Tabs = tab[]
 }
-
 declare namespace User {
   type UserInfo = {
     name: string

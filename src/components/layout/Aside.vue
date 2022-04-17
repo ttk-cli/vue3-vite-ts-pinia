@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import { onBeforeRouteUpdate } from 'vue-router'
 import router from '@/utils/router'
 import meta from '../../pages.json'
 import { lastItem } from '@/utils/shared'
@@ -36,11 +37,20 @@ import { useAppStore } from '@/store/app'
 import { storeToRefs } from 'pinia'
 
 const route = useRoute()
+
 // 菜单
 const menus: any = computed(() => router[0].children?.filter((i) => i.meta))
 
 const appStore = useAppStore()
 const { isCollapse } = storeToRefs(appStore)
+const { addTab } = appStore
+
+// 更新头部tabs
+onBeforeRouteUpdate((to, from, next) => {
+  const tab = { title: lastItem(to.meta.title), name: to.path }
+  addTab(tab)
+  next()
+})
 </script>
 
 <style lang="scss" scoped>

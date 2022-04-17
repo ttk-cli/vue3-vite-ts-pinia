@@ -1,17 +1,16 @@
+.el-container {
+  height: 100%;
+}
 .el-aside {
   overflow: hidden;
   width: auto;
   background: #304156;
 }
 .el-header {
-  display: flex;
   z-index: 10;
-  justify-content: space-between;
-  align-items: center;
   padding: 0;
   background: #fff;
-  box-shadow: 0 2px 2px #999;
 }
-.el-container {
-  height: 100%;
+.el-main {
+  margin-top: 40px;
 }
