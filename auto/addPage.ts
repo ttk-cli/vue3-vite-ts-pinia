@@ -46,7 +46,7 @@ function addPages(pages) {
 </template>
 `
       : `<template>
-  <div>${title}</div>
+  <div class="page-${page}">${title}</div>
 </template>
 
 <script lang="ts" setup name="${page}"></script>

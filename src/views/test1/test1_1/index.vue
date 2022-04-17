@@ -1,5 +1,5 @@
 <template>
-  <div>test1,test1_1</div>
+  <div class="page-test1_1">test1,test1_1</div>
 </template>
 
 <script lang="ts" setup name="test1_1"></script>

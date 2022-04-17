@@ -8,7 +8,13 @@
         <Header />
       </el-header>
       <el-main>
-        <router-view></router-view>
+        <router-view v-slot="{ Component, route }">
+          <transition name="fade-transform" mode="out-in">
+            <keep-alive :max="10">
+              <component :is="Component" :key="route.name"></component>
+            </keep-alive>
+          </transition>
+        </router-view>
       </el-main>
     </el-container>
   </el-container>
