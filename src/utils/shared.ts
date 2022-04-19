@@ -15,22 +15,6 @@ export const clone = (json: any) => {
   return JSON.parse(JSON.stringify(json))
 }
 
-export const remove = (arr: any[], el: any) => {
-  const i = arr.indexOf(el)
-  if (i > -1) {
-    arr.splice(i, 1)
-  }
-  return arr
-}
-
-export const removeItem = (arr: any[], el: any, val: any) => {
-  const i = arr.findIndex((i) => i[el] === val)
-  if (i > -1) {
-    arr.splice(i, 1)
-  }
-  return arr
-}
-
 //对象
 export function isValidKey(
   object: object,
