@@ -11,3 +11,9 @@ declare namespace User {
     token: string
   }
 }
+
+declare namespace Axios {
+  type RequestConfig = AxiosRequestConfig<any> & {
+    myParams: any
+  }
+}

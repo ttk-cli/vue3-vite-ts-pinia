@@ -30,3 +30,21 @@ export const removeItem = (arr: any[], el: any, val: any) => {
   }
   return arr
 }
+
+//对象
+export function isValidKey(
+  object: object,
+  key: string | number | symbol
+): key is keyof typeof object {
+  return key in object
+}
+
+export const stringify = (obj: Object, prefix = '&') => {
+  let str = ''
+  for (const key in obj) {
+    if (isValidKey(obj, key)) {
+      str += `${key}=${obj[key]}${prefix}`
+    }
+  }
+  return str.slice(0, -1)
+}

@@ -21,5 +21,5 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   NProgress.done()
 })
-console.log(routes)
+
 export default router

@@ -40,7 +40,7 @@ module.exports = {
       'error',
       {
         props: true,
-        ignorePropertyModificationsFor: ['request', 'res', 'response', 'state'],
+        ignorePropertyModificationsFor: ['request', 'res', 'response', 'state', 'config'],
       },
     ],
     '@typescript-eslint/ban-ts-ignore': 'off',
