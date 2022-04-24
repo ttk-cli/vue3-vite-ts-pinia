@@ -11,7 +11,7 @@ export function lastItem(arr: any[]) {
   return arr[arr.length - 1]
 }
 
-export const clone = (json: any) => {
+export function clone(json: JSON): JSON {
   return JSON.parse(JSON.stringify(json))
 }
 
@@ -23,7 +23,7 @@ export function isValidKey(
   return key in object
 }
 
-export const stringify = (obj: Object, prefix = '&') => {
+export function stringify(obj: Object, prefix = '&') {
   let str = ''
   for (const key in obj) {
     if (isValidKey(obj, key)) {

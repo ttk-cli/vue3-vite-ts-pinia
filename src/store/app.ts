@@ -23,7 +23,7 @@ export const useAppStore = defineStore({
     updateCollapse() {
       this.isCollapse = !this.isCollapse
     },
-    addTab(tab: App.tab = defaultTab) {
+    addTab(tab: App.Tab = defaultTab) {
       if (this.tabs.some((t) => t.name === tab.name)) return
       this.tabs.push(tab)
     },

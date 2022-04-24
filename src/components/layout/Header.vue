@@ -54,6 +54,7 @@
 import { useAppStore } from '@/store/app'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/user'
+import { RouteLocationRaw } from 'vue-router'
 
 const { logout } = useUserStore()
 
@@ -66,13 +67,13 @@ const router = useRouter()
 
 //面包屑
 const breadcrumbArr = computed(() => {
-  const arr = route.meta.title
-  return arr.filter((i) => i !== '控制台')
+  const arr = route.meta.title as string[]
+  return arr.filter((i: string) => i !== '控制台')
 })
 
 // 切换tabs
 function tabClick(val: number | string = 0, delay = true) {
-  let path
+  let path: RouteLocationRaw
   if (typeof val === 'number') {
     path = tabs.value[val].name
   } else {
@@ -91,7 +92,7 @@ const visible = ref(false)
 const top = ref(0)
 const left = ref(0)
 let clickName = ''
-function rightClick(e, name: string) {
+function rightClick(e: { x: number; y: number }, name: string) {
   clickName = name
   left.value = e.x + 5
   top.value = e.y + 5
@@ -131,14 +132,14 @@ watch(visible, (curAge) => {
 //tabs拖拽
 let dragIndex = 0
 
-function dragstart(index) {
+function dragstart(index: number) {
   dragIndex = index
   closeMenu()
 }
-function dragover(e) {
+function dragover(e: { preventDefault: () => void }) {
   e.preventDefault()
 }
-function dragenter(e, index) {
+function dragenter(e: { preventDefault: () => void }, index: number) {
   if (document.querySelector('.tabs-move')) return
   e.preventDefault()
   if (dragIndex !== index) {

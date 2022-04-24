@@ -1,9 +1,9 @@
 declare namespace App {
-  type tab = {
+  type Tab = {
     title: string
     name: string
   }
-  type Tabs = tab[]
+  type Tabs = Tab[]
 }
 declare namespace User {
   type UserInfo = {

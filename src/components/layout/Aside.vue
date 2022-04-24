@@ -7,6 +7,7 @@
       background-color="#304156"
       text-color="#bfcbd9"
       active-text-color="#409EFF"
+      :data-text="APP_NAME"
     >
       <template v-for="menu in menus" :key="menu.path">
         <el-menu-item v-if="menu.children.length === 0" :index="menu.path">
@@ -31,10 +32,10 @@
 <script setup lang="ts">
 import { onBeforeRouteUpdate } from 'vue-router'
 import router from '@/utils/router'
-import meta from '../../pages.json'
 import { lastItem } from '@/utils/shared'
 import { useAppStore } from '@/store/app'
 import { storeToRefs } from 'pinia'
+import { APP_NAME } from '@/config/app'
 
 const route = useRoute()
 
@@ -47,7 +48,7 @@ const { addTab } = appStore
 
 // 更新头部tabs
 onBeforeRouteUpdate((to, from, next) => {
-  const tab = { title: lastItem(to.meta.title), name: to.path }
+  const tab = { title: lastItem(to.meta.title as string[]), name: to.path }
   addTab(tab)
   next()
 })
@@ -62,22 +63,31 @@ onBeforeRouteUpdate((to, from, next) => {
     position: fixed;
     top: 0;
     z-index: 10;
-    padding: 0 10px;
+    box-sizing: border-box;
     width: 200px;
     height: 60px;
     background: #189f92;
     line-height: 60px;
     text-overflow: ellipsis;
+    text-align: center;
     font-size: 16px;
     color: #fff;
     white-space: nowrap;
-    content: 'ADMIN - VUE3 - PINIA';
+    content: attr(data-text);
   }
 }
 .el-menu--collapse {
   width: 70px;
   &::before {
+    width: 70px;
     content: 'ADMIN';
+  }
+}
+.v-leave-to {
+  width: 200px;
+  &::before {
+    width: 200px;
+    content: attr(data-text);
   }
 }
 </style>

@@ -1,1 +1,1 @@
-export const APP_NAME = 'vue3-vite-pinia'
+export const APP_NAME = 'ADMIN - VUE3 - PINIA'
