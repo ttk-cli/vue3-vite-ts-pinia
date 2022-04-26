@@ -3,7 +3,7 @@ import env from '@/config/env'
 import 'element-plus/es/components/message/style/css'
 import 'element-plus/es/components/loading/style/css'
 import { ElLoading, ElMessage } from 'element-plus'
-import { commonParams } from './commonParams'
+import { commonParams } from '@/config/commonParams'
 import { stringify } from './shared'
 import { useUserStore } from '@/store/user'
 
