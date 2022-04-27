@@ -17,7 +17,6 @@
 
 <script lang="ts" setup name="dashboard">
 import { useTestStore } from '@/store/test'
-import { storeToRefs } from 'pinia'
 import apiTest from '@/api/apiTest'
 
 const router = useRouter()

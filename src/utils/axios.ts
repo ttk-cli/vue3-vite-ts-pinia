@@ -1,28 +1,11 @@
-import Axios, { AxiosRequestConfig } from 'axios'
+import Axios from 'axios'
 import env from '@/config/env'
 import 'element-plus/es/components/message/style/css'
-import 'element-plus/es/components/loading/style/css'
-import { ElLoading, ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { commonParams } from '@/config/commonParams'
 import { stringify } from './shared'
 import { useUserStore } from '@/store/user'
-
-let loadingInstance: any
-let loadingCount = 0
-
-function loadingShow() {
-  loadingCount += 1
-  if (loadingCount > 1) return
-  loadingInstance = ElLoading.service({
-    text: 'Loading...',
-  })
-}
-
-function loadingClose() {
-  loadingCount -= 1
-  if (loadingCount > 0) return
-  loadingInstance.close()
-}
+import { loadingClose, loadingShow } from '@/config/serviceLoading'
 
 const axios = Axios.create({
   baseURL: env.apiBaseUrl,
@@ -55,8 +38,8 @@ axios.interceptors.request.use(
 // 后置拦截器（获取到响应时的拦截）
 axios.interceptors.response.use(
   ({ data }) => {
-    const userStore = useUserStore()
     loadingClose()
+    const userStore = useUserStore()
     switch (data.errno) {
       case 0:
         return data
