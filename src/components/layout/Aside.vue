@@ -34,7 +34,6 @@ import { onBeforeRouteUpdate } from 'vue-router'
 import router from '@/utils/router'
 import { lastItem } from '@/utils/shared'
 import { useAppStore } from '@/store/app'
-import { storeToRefs } from 'pinia'
 import { APP_NAME } from '@/config/app'
 
 const route = useRoute()

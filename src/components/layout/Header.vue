@@ -52,7 +52,6 @@
 
 <script setup lang="ts">
 import { useAppStore } from '@/store/app'
-import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/user'
 import { RouteLocationRaw } from 'vue-router'
 

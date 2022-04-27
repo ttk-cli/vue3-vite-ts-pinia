@@ -1,5 +1,3 @@
-import { defineStore } from 'pinia'
-
 export const defaultTab = { title: '控制台', name: '/' }
 
 export const useAppStore = defineStore({
