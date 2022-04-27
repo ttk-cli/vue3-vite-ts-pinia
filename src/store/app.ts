@@ -1,4 +1,4 @@
-export const defaultTab = { title: '控制台', name: '/' }
+const defaultTab = { title: '控制台', name: '/' }
 
 export const useAppStore = defineStore({
   id: 'app',
