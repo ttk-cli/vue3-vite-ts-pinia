@@ -10,7 +10,8 @@
     "lint": "eslint --ext .vue --ext .js --ext .ts src/ --fix",
     "style": "stylelint \"src/**/*.(vue|scss|css)\" --fix",
     "postinstall": "husky install",
-    "add": "node ./auto/addPage.ts"
+    "add": "node ./auto/addPage.ts",
+    "cz": "git add . && cz"
   },
   "dependencies": {
     "@iconify/json": "2.1.31",
@@ -30,7 +31,9 @@
     "@typescript-eslint/parser": "4.15.1",
     "@vitejs/plugin-vue": "2.3.1",
     "@vue/eslint-config-typescript": "7.0.0",
+    "commitizen": "4.2.4",
     "commitlint": "16.2.3",
+    "cz-customizable": "^6.3.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-taro": "3.3.15",
