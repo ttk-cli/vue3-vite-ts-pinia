@@ -18,7 +18,7 @@ const axios = Axios.create({
 
 // 前置拦截器（发起请求之前的拦截）
 axios.interceptors.request.use(
-  (config: Axios.RequestConfig) => {
+  (config) => {
     const { myparams } = config
     if (myparams.isLoading) loadingShow()
     delete myparams.isLoading
@@ -71,7 +71,7 @@ methods.forEach(
   (method: Method) =>
     (axios[method] = (url: string, myparams: any = {}) => {
       Object.assign(myparams, commonParams)
-      const axiosOpts: Axios.RequestConfig = {
+      const axiosOpts = {
         method,
         myparams,
         url,
