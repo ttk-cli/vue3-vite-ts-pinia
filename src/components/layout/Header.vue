@@ -176,20 +176,21 @@ function dragenter(e: { preventDefault: () => void }, index: number) {
 .tabs {
   overflow-x: scroll;
   overflow-y: hidden;
-  padding-top: 5px;
+  box-sizing: border-box;
+  padding: 5px;
   width: 100%;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
   font-size: 12px;
   color: #666;
   white-space: nowrap;
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
   .tab-item {
     display: inline-block;
     position: relative;
-    margin-left: 5px;
+    margin: 0 3px;
     padding: 5px 20px;
     border: 1px solid #ddd;
     border-radius: 2px;

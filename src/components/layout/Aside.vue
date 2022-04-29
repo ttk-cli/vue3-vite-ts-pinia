@@ -59,10 +59,12 @@ onBeforeRouteUpdate((to, from, next) => {
   border-right: 0;
   width: 200px;
   &::before {
+    overflow: hidden;
     position: fixed;
     top: 0;
     z-index: 10;
     box-sizing: border-box;
+    padding: 0 10px;
     width: 200px;
     height: 60px;
     background: #189f92;

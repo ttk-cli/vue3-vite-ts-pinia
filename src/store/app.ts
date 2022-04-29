@@ -10,11 +10,9 @@ export const useAppStore = defineStore({
     return {
       isCollapse: false,
       tabs: [defaultTab],
-      cachedViews: [],
     } as {
       isCollapse: boolean
       tabs: App.Tab[]
-      cachedViews: string[]
     }
   },
   actions: {
