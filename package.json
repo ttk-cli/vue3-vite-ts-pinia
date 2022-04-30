@@ -11,7 +11,8 @@
     "style": "stylelint \"src/**/*.(vue|scss|css)\" --fix",
     "postinstall": "husky install",
     "add": "node ./auto/addPage.ts",
-    "cz": "git add . && cz"
+    "cz": "git add . && cz",
+    "tag": "npm version patch && git push && git push origin --tags"
   },
   "dependencies": {
     "@iconify/json": "2.1.31",
