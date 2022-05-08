@@ -89,7 +89,8 @@ module.exports = {
     // 禁止使用多个空格
     'no-multi-spaces': 'warn',
     // 禁止多次声明同一变量
-    'no-redeclare': 'warn',
+    'no-redeclare': 'off',
+    '@typescript-eslint/no-redeclare': ['error'],
     // 禁止在 return 语句中使用赋值语句
     'no-return-assign': 'warn',
     // 禁用不必要的 return await

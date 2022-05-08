@@ -1,41 +1,20 @@
 import piniaPluginPersist from 'pinia-plugin-persist'
+import { StoreToRefs } from 'vue'
+import appStore from './app'
 import userStore from './user'
 import testStore from './test'
-import appStore from './app'
 
 const storeExports = {
-  app: useAppStroe,
-  user: useUserStroe,
-  test: useTestStroe,
+  app: appStore,
+  user: userStore,
+  test: testStore,
 }
-
-function useAppStroe() {
-  const store = appStore()
+export function useStore<T extends keyof typeof storeExports>(storeName: T) {
+  const store = storeExports[storeName]()
   const storeRefs = storeToRefs(store)
-  return { ...store, ...storeRefs }
-}
-
-function useUserStroe() {
-  const store = userStore()
-  const storeRefs = storeToRefs(store)
-  return { ...store, ...storeRefs }
-}
-
-function useTestStroe() {
-  const store = testStore()
-  const storeRefs = storeToRefs(store)
-  return { ...store, ...storeRefs }
-}
-
-// @ts-ignore
-export function useStore(storeName: 'app'): ReturnType<typeof useAppStroe>
-// eslint-disable-next-line no-redeclare
-export function useStore(storeName: 'user'): ReturnType<typeof useUserStroe>
-// eslint-disable-next-line no-redeclare
-export function useStore(storeName: 'test'): ReturnType<typeof useTestStroe>
-// eslint-disable-next-line no-redeclare
-export function useStore(storeName: keyof typeof storeExports) {
-  return storeExports[storeName]()
+  return { ...store, ...storeRefs } as unknown as StoreToRefs<
+    ReturnType<Types.PickOne<typeof storeExports, T>>
+  >
 }
 
 const store = createPinia()
