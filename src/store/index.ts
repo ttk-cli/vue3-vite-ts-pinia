@@ -1,14 +1,16 @@
 import piniaPluginPersist from 'pinia-plugin-persist'
 import { StoreToRefs } from 'vue'
+// if: pinia-auto-refs
 import appStore from './app'
-import userStore from './user'
 import testStore from './test'
+import userStore from './user'
 
 const storeExports = {
   app: appStore,
-  user: userStore,
   test: testStore,
+  user: userStore,
 }
+// endif
 export function useStore<T extends keyof typeof storeExports>(storeName: T) {
   const store = storeExports[storeName]()
   const storeRefs = storeToRefs(store)
