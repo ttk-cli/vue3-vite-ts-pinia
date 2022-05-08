@@ -8,7 +8,7 @@ export default defineStore({
     return {
       name: '张三',
       token: 'token...',
-    }
+    } as Test
   },
   getters: {
     fullName: ({ name }) => {

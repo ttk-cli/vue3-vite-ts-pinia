@@ -22,13 +22,14 @@ export default function (options: Options = {}) {
   async function generateConfigFiles() {
     const filesPath = await fs.readdir(dirPath)
     const eslintConfigs = { globals: {} }
-    const namespaces = []
+    const dtsArr = []
     for (const filePath of filesPath) {
       const file = await fs.readFile(dirPath + '\\' + filePath, 'utf-8')
-      namespaces.push(...file.match(/(?<=namespace )[\S]*/g))
+      const dts = file.match(/(?<=declare (namespace|type|interface) )[a-zA-Z0-9]*/g)
+      dts && dtsArr.push(...dts)
     }
-    for (const namespace of namespaces) {
-      eslintConfigs.globals[namespace] = globalsPropValue
+    for (const dts of dtsArr) {
+      eslintConfigs.globals[dts] = globalsPropValue
     }
     fs.writeFile(filepath, JSON.stringify(eslintConfigs, null, 2), 'utf-8')
   }

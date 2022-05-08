@@ -1,6 +1,4 @@
-declare namespace Types {
-  type AnyObj = {
-    [propName: string]: any
-  }
-  type PickOne<T, K extends keyof T> = T[K]
+declare type AnyObj = {
+  [propName: string]: any
 }
+declare type PickOne<T, K extends keyof T> = T[K]

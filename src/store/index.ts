@@ -13,7 +13,7 @@ export function useStore<T extends keyof typeof storeExports>(storeName: T) {
   const store = storeExports[storeName]()
   const storeRefs = storeToRefs(store)
   return { ...store, ...storeRefs } as unknown as StoreToRefs<
-    ReturnType<Types.PickOne<typeof storeExports, T>>
+    ReturnType<PickOne<typeof storeExports, T>>
   >
 }
 

@@ -2,8 +2,10 @@
   "globals": {
     "GetTest": true,
     "PostTest": true,
-    "Types": true,
+    "AnyObj": true,
+    "PickOne": true,
     "App": true,
-    "User": true
+    "User": true,
+    "Test": true
   }
 }

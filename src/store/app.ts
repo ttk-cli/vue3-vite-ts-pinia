@@ -10,10 +10,7 @@ export default defineStore({
     return {
       isCollapse: false,
       tabs: [defaultTab],
-    } as {
-      isCollapse: boolean
-      tabs: App.Tab[]
-    }
+    } as App
   },
   actions: {
     updateCollapse() {
