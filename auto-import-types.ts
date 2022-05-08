@@ -2,13 +2,13 @@ import { promises as fs } from 'fs'
 import { resolve } from 'path'
 
 type Options = Partial<{
-  typesPath: string
+  dtsDir: string
   filepath: string
   globalsPropValue: boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
 }>
 
 const defaultOptions = {
-  typesPath: 'src/@types',
+  dtsDir: 'src/@types',
   filepath: '.eslintrc-auto-import-types.json',
   globalsPropValue: true,
 }
@@ -16,8 +16,8 @@ const defaultOptions = {
 export default function (options: Options = {}) {
   Object.assign(options, defaultOptions)
 
-  const { typesPath, filepath, globalsPropValue } = options
-  const dirPath = resolve(__dirname, typesPath)
+  const { dtsDir, filepath, globalsPropValue } = options
+  const dirPath = resolve(__dirname, dtsDir)
 
   async function generateConfigFiles() {
     const filesPath = await fs.readdir(dirPath)
@@ -37,7 +37,7 @@ export default function (options: Options = {}) {
   return {
     name: 'auto-import-types',
     handleHotUpdate(ctx) {
-      if (ctx.file.includes(typesPath)) {
+      if (ctx.file.includes(dtsDir)) {
         generateConfigFiles()
       }
     },
