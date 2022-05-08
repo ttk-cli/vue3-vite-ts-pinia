@@ -30,10 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeRouteUpdate } from 'vue-router'
 import router from '@/utils/router'
 import { lastItem } from '@/utils/shared'
-import { useAppStore } from '@/store/app'
 import { APP_NAME } from '@/config/app'
 
 const route = useRoute()
@@ -41,16 +39,7 @@ const route = useRoute()
 // 菜单
 const menus: any = computed(() => router[0].children?.filter((i) => i.meta))
 
-const appStore = useAppStore()
-const { isCollapse } = storeToRefs(appStore)
-const { addTab } = appStore
-
-// 更新头部tabs
-onBeforeRouteUpdate((to, from, next) => {
-  const tab = { title: lastItem(to.meta.title as string[]), name: to.path }
-  addTab(tab)
-  next()
-})
+const { isCollapse } = useStore('app')
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-export const useTestStore = defineStore({
+export default defineStore({
   id: 'test',
   persist: {
     // 开启持久化

@@ -51,15 +51,21 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '@/store/app'
-import { useUserStore } from '@/store/user'
-import { RouteLocationRaw } from 'vue-router'
+import { lastItem } from '@/utils/shared'
+import { onBeforeRouteUpdate, RouteLocationRaw } from 'vue-router'
 
-const { logout } = useUserStore()
+const { logout } = useStore('user')
 
-const appStore = useAppStore()
-const { isCollapse, tabs } = storeToRefs(appStore)
-const { updateCollapse, addTab, removeTab, removeOtherTab, removeRightTab, removeAllTab } = appStore
+const {
+  isCollapse,
+  tabs,
+  updateCollapse,
+  addTab,
+  removeTab,
+  removeOtherTab,
+  removeRightTab,
+  removeAllTab,
+} = useStore('app')
 
 const route = useRoute()
 const router = useRouter()
@@ -68,6 +74,13 @@ const router = useRouter()
 const breadcrumbArr = computed(() => {
   const arr = route.meta.title as string[]
   return arr.filter((i: string) => i !== '控制台')
+})
+
+// 更新头部tabs
+onBeforeRouteUpdate((to, from, next) => {
+  const tab = { title: lastItem(to.meta.title as string[]), name: to.path }
+  addTab(tab)
+  next()
 })
 
 // 切换tabs
@@ -101,7 +114,7 @@ function closeMenu() {
   visible.value = false
 }
 function tabRemove(name: string = clickName) {
-  const index = tabs.value.findIndex((i) => i.name === name)
+  const index = tabs.value.findIndex((i: App.Tab) => i.name === name)
   removeTab(name)
   const nextTabIndex = index > tabs.value.length - 1 ? tabs.value.length - 1 : index
   tabClick(nextTabIndex)
@@ -112,7 +125,7 @@ function tabRemoveOther() {
 }
 function tabRemoveRight() {
   removeRightTab(clickName)
-  if (tabs.value.every((i) => i.name !== route.path)) {
+  if (tabs.value.every((i: App.Tab) => i.name !== route.path)) {
     tabClick(clickName)
   }
 }

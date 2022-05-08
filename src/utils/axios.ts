@@ -4,7 +4,6 @@ import 'element-plus/es/components/message/style/css'
 import { ElMessage } from 'element-plus'
 import { commonParams } from '@/config/commonParams'
 import { stringify } from './shared'
-import { useUserStore } from '@/store/user'
 import { loadingClose, loadingShow } from '@/config/serviceLoading'
 
 const axios = Axios.create({
@@ -39,13 +38,13 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   ({ data }) => {
     loadingClose()
-    const userStore = useUserStore()
+    const { fedLogout } = useStore('user')
     switch (data.errno) {
       case 0:
         return data
       case 1000:
         ElMessage.error(`${data.msg}`)
-        return userStore.fedLogout()
+        return fedLogout()
 
       default:
         ElMessage.error(`${data.msg}`)

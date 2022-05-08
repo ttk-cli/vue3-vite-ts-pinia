@@ -59,6 +59,7 @@
     "useRoute": "readonly",
     "useRouter": "readonly",
     "useSlots": "readonly",
+    "useStore": "readonly",
     "watch": "readonly",
     "watchEffect": "readonly"
   }

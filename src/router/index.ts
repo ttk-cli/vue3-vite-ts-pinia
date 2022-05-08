@@ -1,4 +1,3 @@
-import { useUserStore } from '@/store/user'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from '@/utils/router'
 // 进度条
@@ -13,8 +12,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if (to.path === '/login') return next()
-  const { logged } = useUserStore()
-  if (!logged) return next('/login')
+  const { logged } = useStore('user')
+  if (!logged.value) return next('/login')
   next()
 })
 

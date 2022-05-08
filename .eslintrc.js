@@ -165,4 +165,7 @@ module.exports = {
     'no-case-declarations': 'warn',
     'no-async-promise-executor': 'warn',
   },
+  globals: {
+    App: 'readonly',
+  },
 }

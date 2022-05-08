@@ -2,9 +2,10 @@
   <div @click="login">login</div>
 </template>
 
-<script setup>
-import { useUserStore } from '@/store/user'
+<script lang="ts" setup>
+import useUserStore from '@/store/user'
 const { setUserInfo } = useUserStore()
+// const { setUserInfo } = useStore('user')
 const router = useRouter()
 async function login() {
   await setUserInfo({

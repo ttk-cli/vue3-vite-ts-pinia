@@ -16,7 +16,14 @@ export default defineConfig({
   plugins: [
     AutoImport({
       dts: 'src/auto-imports.d.ts', // 可以自定义文件生成的位置，默认是根目录下
-      imports: ['vue', 'vue-router', 'pinia'],
+      imports: [
+        'vue',
+        'vue-router',
+        'pinia',
+        {
+          '@/helpers/pinia-auto-refs.ts': ['useStore'],
+        },
+      ],
       eslintrc: {
         enabled: true, // Default `false`
         filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
