@@ -1,0 +1,9 @@
+{
+  "globals": {
+    "GetTest": true,
+    "PostTest": true,
+    "Types": true,
+    "App": true,
+    "User": true
+  }
+}

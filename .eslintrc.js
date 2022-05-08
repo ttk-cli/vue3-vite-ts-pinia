@@ -15,6 +15,7 @@ module.exports = {
     'prettier',
     'vue-global-api',
     '.eslintrc-auto-import.json',
+    '.eslintrc-auto-import-types.json',
   ],
   parserOptions: {
     ecmaVersion: 12,
@@ -164,8 +165,5 @@ module.exports = {
     'no-extra-boolean-cast': 'warn',
     'no-case-declarations': 'warn',
     'no-async-promise-executor': 'warn',
-  },
-  globals: {
-    App: 'readonly',
   },
 }
