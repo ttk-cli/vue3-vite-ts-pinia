@@ -3,41 +3,60 @@ import { resolve } from 'path'
 
 type Options = Partial<{
   storeDir: string
-  entryFile: string
+  excludes: string[]
+  outputFile: string
 }>
 
 const defaultOptions = {
   storeDir: 'src/store',
-  entryFile: 'src/store/index.ts',
+  excludes: ['index'],
+  outputFile: 'src/helper/pinia-auto-refs.ts',
 }
 
 export default function (options: Options = {}) {
   Object.assign(options, defaultOptions)
 
-  const { storeDir, entryFile } = options
+  const { storeDir, excludes, outputFile } = options
   const storePath = resolve(__dirname, storeDir)
+  const outputDir = outputFile.replace(/(\/[^/]*).ts/, '')
+  fs.readdir(outputDir).catch(() => fs.mkdir(outputDir))
 
   async function generateConfigFiles() {
-    let storesPath = await fs.readdir(storePath)
-    let ctx = await fs.readFile(entryFile, 'utf-8')
-    if (entryFile.startsWith(storeDir)) {
-      storesPath = storesPath.filter((i) => !entryFile.endsWith(i))
-    }
-    const storeNames = storesPath.map((i) => i.replace('.ts', ''))
-    ctx = ctx.replace(/(?<=\/\/ if: pinia-auto-refs)[\s\S]*(?=\/\/ endif)/, () => {
-      let res = '\n'
-      for (const storeName of storeNames) {
-        res += `import ${storeName}Store from './${storeName}'\n`
-      }
-      res += '\n'
-      res += 'const storeExports = {\n'
-      for (const storeName of storeNames) {
-        res += `  ${storeName}: ${storeName}Store,\n`
-      }
-      res += '}\n'
-      return res
-    })
-    fs.writeFile(entryFile, ctx, 'utf-8')
+    const storesPath = await fs.readdir(storePath)
+    const storeNames = storesPath
+      .map((i) => i.replace('.ts', ''))
+      .filter((i) => !excludes.includes(i))
+
+    const ctx = `// auto import by 'pinia-auto-refs'
+${storeNames.reduce(
+  (str, storeName) => `${str}import ${storeName}Store from '@/store/${storeName}'
+`,
+  ''
+)}
+import { ToRef, StoreToRefs } from 'vue'
+declare module 'vue' {
+  export type StoreToRefs<T> = {
+    [K in keyof T]: T[K] extends Function ? T[K] : ToRef<T[K]>
+  }
+}
+declare type PickOne<T, K extends keyof T> = T[K]
+
+const storeExports = {
+${storeNames.reduce(
+  (str, storeName) => `${str}  ${storeName}: ${storeName}Store,
+`,
+  ''
+)}}
+
+export function useStore<T extends keyof typeof storeExports>(storeName: T) {
+  const store = storeExports[storeName]()
+  const storeRefs = storeToRefs(store)
+  return { ...store, ...storeRefs } as unknown as StoreToRefs<
+    ReturnType<PickOne<typeof storeExports, T>>
+  >
+}
+`
+    fs.writeFile(outputFile, ctx, 'utf-8')
   }
 
   generateConfigFiles()

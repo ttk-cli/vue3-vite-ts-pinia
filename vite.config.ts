@@ -25,7 +25,7 @@ export default defineConfig({
         'vue-router',
         'pinia',
         {
-          '@/store': ['useStore'],
+          '@/helper/pinia-auto-refs': ['useStore'],
         },
       ],
       eslintrc: {

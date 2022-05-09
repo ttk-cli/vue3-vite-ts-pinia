@@ -3,7 +3,6 @@
     "GetTest": true,
     "PostTest": true,
     "AnyObj": true,
-    "PickOne": true,
     "App": true,
     "User": true,
     "Test": true
