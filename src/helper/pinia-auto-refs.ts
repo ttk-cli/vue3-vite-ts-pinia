@@ -1,4 +1,4 @@
-// auto import by 'pinia-auto-refs'
+// "https://github.com/Allen-1998/pinia-auto-refs"
 import appStore from '@/store/app'
 import testStore from '@/store/test'
 import userStore from '@/store/user'
