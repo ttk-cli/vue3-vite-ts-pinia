@@ -5,7 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Unocss from 'unocss/vite'
-import AutoImportTypes from './auto-import-types'
+import AutoImportTypes from 'auto-import-types'
 import PiniaAutoRefs from 'pinia-auto-refs'
 
 // https://vitejs.dev/config/
