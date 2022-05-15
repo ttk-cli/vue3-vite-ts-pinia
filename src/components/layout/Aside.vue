@@ -30,9 +30,9 @@
 </template>
 
 <script setup lang="ts">
+import { APP_NAME } from '@/config/app'
 import router from '@/utils/router'
 import { lastItem } from '@/utils/shared'
-import { APP_NAME } from '@/config/app'
 
 const route = useRoute()
 

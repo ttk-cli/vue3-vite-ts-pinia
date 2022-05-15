@@ -1,10 +1,13 @@
-import Axios from 'axios'
-import env from '@/config/env'
 import 'element-plus/es/components/message/style/css'
+
+import Axios from 'axios'
 import { ElMessage } from 'element-plus'
+
 import { commonParams } from '@/config/commonParams'
-import { stringify } from './shared'
+import env from '@/config/env'
 import { loadingClose, loadingShow } from '@/config/serviceLoading'
+
+import { stringify } from './shared'
 
 const axios = Axios.create({
   baseURL: env.apiBaseUrl,

@@ -51,8 +51,9 @@
 </template>
 
 <script setup lang="ts">
-import { lastItem } from '@/utils/shared'
 import { onBeforeRouteUpdate, RouteLocationRaw } from 'vue-router'
+
+import { lastItem } from '@/utils/shared'
 
 const { logout } = useStore('user')
 

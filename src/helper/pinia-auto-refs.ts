@@ -1,9 +1,9 @@
 // "https://github.com/Allen-1998/pinia-auto-refs"
+import { AutoToRefs, ToRef } from 'vue'
+
 import appStore from '@/store/app'
 import testStore from '@/store/test'
 import userStore from '@/store/user'
-
-import { ToRef, AutoToRefs } from 'vue'
 declare module 'vue' {
   export type AutoToRefs<T> = {
     [K in keyof T]: T[K] extends Function ? T[K] : ToRef<T[K]>

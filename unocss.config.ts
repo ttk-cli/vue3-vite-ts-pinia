@@ -1,4 +1,4 @@
-import { defineConfig, presetUno, presetAttributify, presetIcons, Rule } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetUno, Rule } from 'unocss'
 // https://github.com/unocss/unocss
 
 const sizeMapping: Record<string, string> = {

@@ -1,5 +1,6 @@
-import meta from '../pages.json'
 import { RouteRecordRaw } from 'vue-router'
+
+import meta from '../pages.json'
 
 type MetaType = keyof typeof meta
 type ModulesType = keyof typeof modules

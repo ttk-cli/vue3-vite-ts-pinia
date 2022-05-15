@@ -1,8 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import routes from '@/utils/router'
+import 'nprogress/nprogress.css'
+
 // 进度条
 import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
+import { createRouter, createWebHistory } from 'vue-router'
+
+import routes from '@/utils/router'
 
 const router = createRouter({
   history: createWebHistory(),
