@@ -9,7 +9,6 @@ declare module 'vue' {
     [K in keyof T]: T[K] extends Function ? T[K] : ToRef<T[K]>
   }
 }
-declare type PickOne<T, K extends keyof T> = T[K]
 
 const storeExports = {
   app: appStore,
@@ -20,7 +19,5 @@ const storeExports = {
 export function useStore<T extends keyof typeof storeExports>(storeName: T) {
   const store = storeExports[storeName]()
   const storeRefs = storeToRefs(store)
-  return { ...store, ...storeRefs } as unknown as StoreToRefs<
-    ReturnType<PickOne<typeof storeExports, T>>
-  >
+  return { ...store, ...storeRefs } as unknown as StoreToRefs<ReturnType<typeof storeExports[T]>>
 }
