@@ -117,8 +117,10 @@ function closeMenu() {
 function tabRemove(name: string = clickName) {
   const index = tabs.value.findIndex((i: App.Tab) => i.name === name)
   removeTab(name)
-  const nextTabIndex = index > tabs.value.length - 1 ? tabs.value.length - 1 : index
-  tabClick(nextTabIndex)
+  if (route.path === name) {
+    const nextTabIndex = index > tabs.value.length - 1 ? tabs.value.length - 1 : index
+    tabClick(nextTabIndex)
+  }
 }
 function tabRemoveOther() {
   removeOtherTab(clickName)
