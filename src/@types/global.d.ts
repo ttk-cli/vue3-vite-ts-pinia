@@ -1,3 +1,5 @@
-declare type AnyObj = {
-  [propName: string]: any
+declare namespace Types {
+  type AnyObj = {
+    [propName: string]: any
+  }
 }

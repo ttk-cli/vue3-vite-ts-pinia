@@ -1,7 +1,3 @@
-declare interface App {
-  isCollapse: boolean
-  tabs: Tab[]
-}
 declare namespace App {
   interface Tab {
     title: string
@@ -9,9 +5,6 @@ declare namespace App {
   }
 }
 
-declare interface User {
-  userInfo: UserInfo
-}
 declare namespace User {
   interface UserInfo {
     name: string

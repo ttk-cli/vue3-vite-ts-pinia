@@ -10,7 +10,7 @@ export default defineStore({
         name: '',
         token: '',
       },
-    } as User
+    }
   },
   getters: {
     logged: ({ userInfo }) => !!userInfo.token,

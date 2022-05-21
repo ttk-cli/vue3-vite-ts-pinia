@@ -1,4 +1,4 @@
-const defaultTab = { title: '控制台', name: '/' }
+const defaultTab: App.Tab = { title: '控制台', name: '/' }
 
 export default defineStore({
   id: 'app',
@@ -10,7 +10,7 @@ export default defineStore({
     return {
       isCollapse: false,
       tabs: [defaultTab],
-    } as App
+    }
   },
   actions: {
     updateCollapse() {
