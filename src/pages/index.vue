@@ -10,7 +10,7 @@
       <el-main>
         <router-view v-slot="{ Component, route }">
           <transition name="fade-transform" mode="out-in">
-            <keep-alive :max="10">
+            <keep-alive :include="tabs.map((i) => i.name.slice(1))">
               <component :is="Component" :key="route.name"></component>
             </keep-alive>
           </transition>
@@ -20,4 +20,6 @@
   </el-container>
   <el-backtop target=".el-main"></el-backtop>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const { tabs } = useStore('app')
+</script>

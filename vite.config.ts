@@ -7,6 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
+import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -46,6 +47,7 @@ export default defineConfig({
     }),
     vue(),
     Unocss(),
+    vueSetupExtend(),
   ],
   server: {
     port: 3000,
