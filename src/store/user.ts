@@ -16,8 +16,8 @@ export default defineStore({
     logged: ({ userInfo }) => !!userInfo.token,
   },
   actions: {
-    async setUserInfo(userInfo: User.UserInfo) {
-      Object.assign(this.userInfo, userInfo)
+    setUserInfo(userInfo: User.UserInfo) {
+      this.userInfo = userInfo
     },
     //后端退出
     async logout() {

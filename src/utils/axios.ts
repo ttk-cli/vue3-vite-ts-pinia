@@ -3,7 +3,7 @@ import 'element-plus/es/components/message/style/css'
 import Axios from 'axios'
 import { ElMessage } from 'element-plus'
 
-import { commonParams } from '@/config/commonParams'
+import { getCommonParams } from '@/config/commonParams'
 import env from '@/config/env'
 import { loadingClose, loadingShow } from '@/config/serviceLoading'
 
@@ -21,15 +21,15 @@ const axios = Axios.create({
 // 前置拦截器（发起请求之前的拦截）
 axios.interceptors.request.use(
   (config) => {
-    const { myparams } = config
-    if (myparams.isLoading) loadingShow()
-    delete myparams.isLoading
+    const { fullParams } = config
+    if (fullParams.isLoading) loadingShow()
+    delete fullParams.isLoading
     if (config.method === 'get') {
-      config.params = myparams
+      config.params = fullParams
     } else {
-      config.data = stringify(myparams)
+      config.data = stringify(fullParams)
     }
-    delete config.myparams
+    delete config.fullParams
     return config
   },
   (error: any) => {
@@ -71,11 +71,11 @@ const methods: Method[] = ['get', 'post']
 
 methods.forEach(
   (method: Method) =>
-    (axios[method] = (url: string, myparams: any = {}) => {
-      Object.assign(myparams, commonParams)
+    (axios[method] = (url: string, params: any = {}) => {
+      const fullParams = { ...getCommonParams(), ...params }
       const axiosOpts = {
         method,
-        myparams,
+        fullParams,
         url,
       }
       return new Promise<any>((resolve, reject) => {

@@ -11,6 +11,8 @@
     <Icon v-for="icon in icons" :key="icon" :icon="icon" />
     <div @click="getTest">getTest</div>
     <div @click="postTest">postTest</div>
+    <div @click="setUserInfo({ name: 'allen', token: String(Math.random()) })">setUserInfo</div>
+    <div>userInfo:{{ JSON.stringify(userInfo) }}</div>
     <div v-for="i in 50" :key="i">test</div>
   </div>
 </template>
@@ -24,6 +26,7 @@ function pushRouter(path: string) {
 }
 
 const { name, fullName, updateName } = useStore('test')
+const { userInfo, setUserInfo } = useStore('user')
 
 const dateVal = ref(new Date())
 

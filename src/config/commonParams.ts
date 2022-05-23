@@ -1,4 +1,11 @@
-export const commonParams = {
+const commonParams = {
   isLoading: true,
-  // token:
+}
+
+export function getCommonParams() {
+  const { userInfo } = useStore('user')
+  return {
+    ...commonParams,
+    token: userInfo.value.token,
+  }
 }

@@ -5,8 +5,8 @@
 <script lang="ts" setup>
 const { setUserInfo } = useStore('user')
 const router = useRouter()
-async function login() {
-  await setUserInfo({
+function login() {
+  setUserInfo({
     name: 'admin',
     token: 'admin',
   })
