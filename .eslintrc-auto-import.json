@@ -10,6 +10,7 @@
     "defineStore": "readonly",
     "effectScope": "readonly",
     "EffectScope": "readonly",
+    "ElMessage": "readonly",
     "getActivePinia": "readonly",
     "getCurrentInstance": "readonly",
     "getCurrentScope": "readonly",

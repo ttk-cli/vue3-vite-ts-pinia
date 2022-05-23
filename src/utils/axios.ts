@@ -1,7 +1,6 @@
 import 'element-plus/es/components/message/style/css'
 
 import Axios from 'axios'
-import { ElMessage } from 'element-plus'
 
 import { getCommonParams } from '@/config/commonParams'
 import env from '@/config/env'
