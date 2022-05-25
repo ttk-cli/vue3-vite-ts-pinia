@@ -16,7 +16,7 @@ function setRoute(path: ModulesType, routes: Array<RouteRecordRaw> = []): RouteR
   for (const key in files) {
     const name = key.slice(9, -10)
     const pRoute = arr.find((i) => name.startsWith(i))
-    const obj = {
+    const route = {
       path: getPath(name),
       name: getName(name),
       component: files[key].default,
@@ -24,11 +24,11 @@ function setRoute(path: ModulesType, routes: Array<RouteRecordRaw> = []): RouteR
       meta: meta[getName(name)],
     }
     if (!pRoute) {
-      if (!name) obj.children = setRoute('views')
-      routes.push(obj)
+      if (!name) route.children = setRoute('views').sort(sortFn)
+      routes.push(route)
     } else {
       const parent = routes.find((i) => i.name === pRoute) as RouteRecordRaw
-      parent?.children?.push(obj)
+      parent?.children?.push(route)
     }
     arr.push(name)
   }
@@ -56,6 +56,12 @@ function getPath(name: string) {
   }
   const i = path.lastIndexOf('/')
   return i === 0 ? path : path.slice(i)
+}
+
+// 菜单排序
+const metaArr = Object.keys(meta)
+function sortFn(route1: RouteRecordRaw, route2: RouteRecordRaw) {
+  return metaArr.findIndex((i) => i === route1.name) - metaArr.findIndex((i) => i === route2.name)
 }
 
 const routes = setRoute('pages')
