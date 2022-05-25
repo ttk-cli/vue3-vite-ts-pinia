@@ -1,43 +1,48 @@
 import { RouteRecordRaw } from 'vue-router'
 
 import meta from '../pages.json'
+import { isValidKey } from './shared'
 
-type MetaType = keyof typeof meta
-type ModulesType = keyof typeof modules
+type ViewsType = keyof typeof modules.views
 
 const modules = {
   pages: import.meta.globEager('../pages/**/index.vue'),
   views: import.meta.globEager('../views/**/index.vue'),
 }
 
-const arr: string[] = []
-function setRoute(path: ModulesType, routes: Array<RouteRecordRaw> = []): RouteRecordRaw[] {
-  const files = modules[path]
+function setPages() {
+  const files = modules.pages
   for (const key in files) {
-    const name = key.slice(9, -10)
-    const pRoute = arr.find((i) => name.startsWith(i))
-    const route = {
+    const name = (key.match(/(?<=^.*\/pages\/)[\S]*(?=\/index.vue)/) || [''])[0]
+    const route: RouteRecordRaw = {
       path: getPath(name),
-      name: getName(name),
+      name,
       component: files[key].default,
-      children: [] as RouteRecordRaw[],
-      meta: meta[getName(name)],
     }
-    if (!pRoute) {
-      if (!name) route.children = setRoute('views').sort(sortFn)
-      routes.push(route)
-    } else {
-      const parent = routes.find((i) => i.name === pRoute) as RouteRecordRaw
-      parent?.children?.push(route)
+    if (name === '') {
+      route.children = setViews()
     }
-    arr.push(name)
+    routes.push(route)
   }
-  return routes
 }
 
-function getName(name: string) {
-  const i = name.lastIndexOf('/')
-  return (i === -1 ? name : name.slice(i + 1)) as MetaType
+function setViews() {
+  const files = modules.views
+  const filePaths = Object.keys(files)
+  const views = []
+  for (const name in meta) {
+    if (isValidKey(meta, name)) {
+      const filePath = filePaths.find((path) => path.includes(name)) as ViewsType
+      const route: RouteRecordRaw = {
+        path: getPath(name),
+        name,
+        component: files[filePath].default,
+        meta: meta[name],
+      }
+      views.push(route)
+    }
+  }
+  return views
 }
 
 function getPath(name: string) {
@@ -54,16 +59,10 @@ function getPath(name: string) {
       path = '/' + name
       break
   }
-  const i = path.lastIndexOf('/')
-  return i === 0 ? path : path.slice(i)
+  return path
 }
 
-// 菜单排序
-const metaArr = Object.keys(meta)
-function sortFn(route1: RouteRecordRaw, route2: RouteRecordRaw) {
-  return metaArr.findIndex((i) => i === route1.name) - metaArr.findIndex((i) => i === route2.name)
-}
-
-const routes = setRoute('pages')
+const routes: RouteRecordRaw[] = []
+setPages()
 
 export default routes

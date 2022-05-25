@@ -3,19 +3,8 @@
 </template>
 
 <script setup lang="ts">
-// const props = defineProps({
-//   icon: {
-//     type: String,
-//   },
-//   w: {
-//     type: String,
-//   },
-//   h: {
-//     type: String,
-//   },
-// })
 const props = defineProps<{
-  icon: string
+  icon?: string | unknown
   w?: string
   h?: string
 }>()

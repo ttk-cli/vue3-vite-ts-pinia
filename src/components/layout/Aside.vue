@@ -10,7 +10,7 @@
       :data-text="APP_NAME"
     >
       <template v-for="menu in menus" :key="menu.path">
-        <el-menu-item v-if="menu.children.length === 0" :index="menu.path">
+        <el-menu-item v-if="!menu.meta.hasChild" :index="menu.path">
           <Icon :icon="menu.meta.icon" />
           <template #title>{{ lastItem(menu.meta.title) }}</template>
         </el-menu-item>
@@ -19,7 +19,11 @@
             <Icon :icon="menu.meta.icon" />
             <span>{{ lastItem(menu.meta.title) }}</span>
           </template>
-          <el-menu-item v-for="subMenu in menu.children" :key="subMenu.path" :index="subMenu.path">
+          <el-menu-item
+            v-for="subMenu in subMenus.filter((i:any) => i.meta.title.length > 1 && i.meta.title[0] === menu.meta.title[0])"
+            :key="subMenu.path"
+            :index="subMenu.path"
+          >
             <Icon :icon="subMenu.meta.icon" />
             <template #title>{{ lastItem(subMenu.meta.title) }}</template>
           </el-menu-item>
@@ -37,7 +41,9 @@ import { lastItem } from '@/utils/shared'
 const route = useRoute()
 
 // 菜单
-const menus: any = computed(() => router[0].children?.filter((i) => i.meta))
+const routers = computed(() => router.find((i) => i.path === '/')?.children)
+const menus: any = computed(() => routers.value?.filter((i: any) => i.meta?.title?.length === 1))
+const subMenus: any = computed(() => routers.value?.filter((i: any) => i.meta.title.length > 1))
 
 const { isCollapse } = useStore('app')
 </script>
