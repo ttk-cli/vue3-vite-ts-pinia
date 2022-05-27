@@ -2,14 +2,14 @@ import 'element-plus/es/components/message/style/css'
 
 import Axios from 'axios'
 
+import { API_BASE_URL } from '@/config/app'
 import { getCommonParams } from '@/config/commonParams'
-import env from '@/config/env'
 import { loadingClose, loadingShow } from '@/config/serviceLoading'
 
 import { stringify } from './shared'
 
 const axios = Axios.create({
-  baseURL: env.apiBaseUrl,
+  baseURL: API_BASE_URL,
   timeout: 20000, // 请求超时 20s
   responseType: 'json',
   headers: {
