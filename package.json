@@ -40,7 +40,7 @@
     "auto-import-types": "0.0.1",
     "commitizen": "4.2.4",
     "commitlint": "16.2.3",
-    "cz-customizable": "^6.3.0",
+    "cz-customizable": "6.3.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.26.0",
