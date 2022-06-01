@@ -1,17 +1,17 @@
 // 类型推断
-export const isArray = (val: any) => Array.isArray(val)
+export const isArray = <T>(val: T) => Array.isArray(val)
 
-export const isObject = (val: any) => typeInference(val, 'Object')
+export const isObject = <T>(val: T) => typeInference(val, 'Object')
 
-export const typeInference = (val: any, type: string) =>
+export const typeInference = <T>(val: T, type: string) =>
   Object.prototype.toString.call(val).slice(8, -1) === type
 
 // 数组
-export function lastItem(arr: any[]) {
+export function lastItem<T>(arr: T[]) {
   return arr[arr.length - 1]
 }
 
-export function clone(json: JSON): JSON {
+export function clone<T>(json: T): T {
   return JSON.parse(JSON.stringify(json))
 }
 

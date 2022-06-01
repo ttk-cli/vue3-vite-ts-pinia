@@ -39,7 +39,6 @@ import router from '@/utils/router'
 import { lastItem } from '@/utils/shared'
 
 const route = useRoute()
-
 // 菜单
 const routers = computed(() => router.find((i) => i.path === '/')?.children)
 const menus: any = computed(() => routers.value?.filter((i: any) => i.meta?.title?.length === 1))
