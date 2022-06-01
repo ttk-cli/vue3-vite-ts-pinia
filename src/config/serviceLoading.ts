@@ -1,7 +1,3 @@
-import 'element-plus/es/components/loading/style/css'
-
-import { ElLoading } from 'element-plus'
-
 let loadingInstance: ReturnType<typeof ElLoading.service>
 let loadingCount = 0
 

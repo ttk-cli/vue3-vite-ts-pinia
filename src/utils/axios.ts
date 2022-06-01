@@ -1,5 +1,3 @@
-import 'element-plus/es/components/message/style/css'
-
 import Axios from 'axios'
 
 import { API_BASE_URL } from '@/config/app'
@@ -80,7 +78,7 @@ methods.forEach(
       return new Promise<any>((resolve, reject) => {
         axios(axiosOpts)
           .then((res: any) => {
-            return resolve(res)
+            resolve(res)
           })
           .catch((err: any) => {
             console.log(err)
