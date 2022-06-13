@@ -1,0 +1,18 @@
+.el-container {
+  height: 100%;
+}
+.el-aside {
+  overflow: hidden;
+  width: auto !important;
+  background: #304156;
+}
+.el-header {
+  z-index: 10;
+  padding: 0 !important;
+  background: #fff;
+}
+.el-main {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-top: 40px;
+}
