@@ -9,6 +9,8 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -36,15 +38,17 @@ export default defineConfig({
       },
       resolvers: [ElementPlusResolver()],
     }),
-    Components({
-      // 指定组件位置，默认是src/components
-      dirs: ['src/components'],
-      extensions: ['vue'],
-      // 配置文件生成位置
-      dts: 'src/components.d.ts',
-      // ui库解析器
-      resolvers: [ElementPlusResolver()],
-    }),
+    // 解决 preview 时 components 文件被修改的问题
+    !isProduction &&
+      Components({
+        // 指定组件位置，默认是src/components
+        dirs: ['src/components'],
+        extensions: ['vue'],
+        // 配置文件生成位置
+        dts: 'src/components.d.ts',
+        // ui库解析器
+        resolvers: [ElementPlusResolver()],
+      }),
     vue(),
     Unocss(),
     vueSetupExtend(),
