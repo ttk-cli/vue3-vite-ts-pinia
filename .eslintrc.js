@@ -39,14 +39,6 @@ module.exports = {
       },
     ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }], // 解决依赖问题
-    'no-param-reassign': [
-      // 解决不能直接修改参数问题
-      'error',
-      {
-        props: true,
-        ignorePropertyModificationsFor: ['request', 'res', 'response', 'state', 'config'],
-      },
-    ],
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

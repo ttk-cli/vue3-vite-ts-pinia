@@ -9,26 +9,7 @@
       active-text-color="#409EFF"
       :data-text="APP_NAME"
     >
-      <template v-for="menu in menus" :key="menu.path">
-        <el-menu-item v-if="!menu.meta.hasChild" :index="menu.path">
-          <Icon :icon="menu.meta.icon" />
-          <template #title>{{ lastItem(menu.meta.title) }}</template>
-        </el-menu-item>
-        <el-sub-menu v-else :index="menu.path">
-          <template #title>
-            <Icon :icon="menu.meta.icon" />
-            <span>{{ lastItem(menu.meta.title) }}</span>
-          </template>
-          <el-menu-item
-            v-for="subMenu in subMenus.filter((i:any) => i.meta.title.length > 1 && i.meta.title[0] === menu.meta.title[0])"
-            :key="subMenu.path"
-            :index="subMenu.path"
-          >
-            <Icon :icon="subMenu.meta.icon" />
-            <template #title>{{ lastItem(subMenu.meta.title) }}</template>
-          </el-menu-item>
-        </el-sub-menu>
-      </template>
+      <TreeMenu :menus="treeMenus"></TreeMenu>
     </el-menu>
   </el-scrollbar>
 </template>
@@ -36,13 +17,23 @@
 <script setup lang="ts">
 import { APP_NAME } from '@/config/app'
 import router from '@/utils/router'
-import { lastItem } from '@/utils/shared'
 
 const route = useRoute()
 // 菜单
-const routers = computed(() => router.find((i) => i.path === '/')?.children)
-const menus: any = computed(() => routers.value?.filter((i: any) => i.meta?.title?.length === 1))
-const subMenus: any = computed(() => routers.value?.filter((i: any) => i.meta.title.length > 1))
+const routers = router.find((i) => i.path === '/')?.children
+const treeMenus = getTreeMenus(routers)
+
+function getTreeMenus(menus: any, treeMenus: any = [], level = 1) {
+  const targetMenus = menus.filter((i: any) => i.meta.title.length === level)
+  if (targetMenus.length === 0) return treeMenus
+  targetMenus.forEach((i: any) => {
+    if (i.meta.hasChild) {
+      i.children = getTreeMenus(menus, [], level + 1)
+    }
+    treeMenus.push(i)
+  })
+  return treeMenus
+}
 
 const { isCollapse } = useStore('app')
 </script>
