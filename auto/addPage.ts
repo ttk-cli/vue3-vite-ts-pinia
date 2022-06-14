@@ -15,7 +15,7 @@ function readFileList(dir, filesList = []) {
     if (stat.isDirectory()) {
       readFileList(path.join(dir, item), filesList) //递归读取文件
     } else {
-      const index = dir.lastIndexOf('/') + 1
+      const index = dir.lastIndexOf(path.sep) + 1
       filesList.push(dir.slice(index))
     }
   })
