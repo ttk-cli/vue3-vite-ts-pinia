@@ -9,7 +9,7 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 
-const isProduction = process.env.NODE_ENV === 'production'
+const isPreview = process.env.NODE_ENV === 'production'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,25 +21,27 @@ export default defineConfig({
   plugins: [
     AutoImportTypes(),
     PiniaAutoRefs(),
-    AutoImport({
-      dts: 'src/auto-imports.d.ts', // 可以自定义文件生成的位置，默认是根目录下
-      imports: [
-        'vue',
-        'vue-router',
-        'pinia',
-        {
-          '@/helper/pinia-auto-refs': ['useStore'],
+    // 解决 preview 时 auto-imports 文件被修改的问题
+    !isPreview &&
+      AutoImport({
+        dts: 'src/auto-imports.d.ts', // 可以自定义文件生成的位置，默认是根目录下
+        imports: [
+          'vue',
+          'vue-router',
+          'pinia',
+          {
+            '@/helper/pinia-auto-refs': ['useStore'],
+          },
+        ],
+        eslintrc: {
+          enabled: true, // Default `false`
+          filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+          globalsPropValue: 'readonly', // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
         },
-      ],
-      eslintrc: {
-        enabled: true, // Default `false`
-        filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
-        globalsPropValue: 'readonly', // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
-      },
-      resolvers: [ElementPlusResolver()],
-    }),
+        resolvers: [ElementPlusResolver()],
+      }),
     // 解决 preview 时 components 文件被修改的问题
-    !isProduction &&
+    !isPreview &&
       Components({
         // 指定组件位置，默认是src/components
         dirs: ['src/components'],
