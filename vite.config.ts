@@ -9,8 +9,6 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 
-const isPreview = process.env.NODE_ENV === 'production'
-
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -21,36 +19,32 @@ export default defineConfig({
   plugins: [
     AutoImportTypes(),
     PiniaAutoRefs(),
-    // 解决 preview 时 auto-imports 文件被修改的问题
-    !isPreview &&
-      AutoImport({
-        dts: 'src/auto-imports.d.ts', // 可以自定义文件生成的位置，默认是根目录下
-        imports: [
-          'vue',
-          'vue-router',
-          'pinia',
-          {
-            '@/helper/pinia-auto-refs': ['useStore'],
-          },
-        ],
-        eslintrc: {
-          enabled: true, // Default `false`
-          filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
-          globalsPropValue: 'readonly', // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+    AutoImport({
+      dts: 'src/auto-imports.d.ts', // 可以自定义文件生成的位置，默认是根目录下
+      imports: [
+        'vue',
+        'vue-router',
+        'pinia',
+        {
+          '@/helper/pinia-auto-refs': ['useStore'],
         },
-        resolvers: [ElementPlusResolver()],
-      }),
-    // 解决 preview 时 components 文件被修改的问题
-    !isPreview &&
-      Components({
-        // 指定组件位置，默认是src/components
-        dirs: ['src/components'],
-        extensions: ['vue'],
-        // 配置文件生成位置
-        dts: 'src/components.d.ts',
-        // ui库解析器
-        resolvers: [ElementPlusResolver()],
-      }),
+      ],
+      eslintrc: {
+        enabled: true, // Default `false`
+        filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+        globalsPropValue: 'readonly', // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+      },
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      // 指定组件位置，默认是src/components
+      dirs: ['src/components'],
+      extensions: ['vue'],
+      // 配置文件生成位置
+      dts: 'src/components.d.ts',
+      // ui库解析器
+      resolvers: [ElementPlusResolver()],
+    }),
     vue(),
     Unocss(),
     vueSetupExtend(),
