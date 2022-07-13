@@ -2,10 +2,6 @@ export function lastItem<T>(arr: T[]) {
   return arr[arr.length - 1]
 }
 
-export function clone<T>(json: T): T {
-  return JSON.parse(JSON.stringify(json))
-}
-
 export function isValidKey(
   object: object,
   key: string | number | symbol
