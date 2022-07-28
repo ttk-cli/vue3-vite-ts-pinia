@@ -34,7 +34,7 @@ const icons = ['foundation-indent-more', 'foundation-indent-less', '']
 
 async function getTest() {
   const res = await apiTest.getTest({ a: 1 })
-  console.log(res, 111)
+  console.log(res, 1111)
   // res.data.age
   // res.data.name
 }
