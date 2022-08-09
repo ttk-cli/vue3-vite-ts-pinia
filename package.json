@@ -1,7 +1,7 @@
 {
   "name": "vue3-vite-ts-pinia",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "serve": "vite --mode dev",
     "serve:beta": "vite --mode beta",
