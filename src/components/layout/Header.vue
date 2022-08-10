@@ -2,10 +2,13 @@
   <div class="breadcrumb">
     <div class="flex items-center">
       <div class="collapse-icon" @click="updateCollapse">
-        <Icon
-          :icon="isCollapse ? 'foundation-indent-less' : 'foundation-indent-more'"
-          w="w30"
-          h="h30"
+        <div
+          :class="[
+            isCollapse ? 'foundation-indent-less' : 'foundation-indent-more',
+            'w30',
+            'h30',
+            'mx10',
+          ]"
         />
       </div>
       <el-breadcrumb separator="/">

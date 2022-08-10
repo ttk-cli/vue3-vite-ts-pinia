@@ -8,7 +8,7 @@
     <div @click="updateName('333')">updateName</div>
     <el-button class="m10 w200 br10 c-#387">I am ElButton</el-button>
     <el-date-picker v-model="dateVal" type="date" placeholder="Pick a day" />
-    <Icon v-for="icon in icons" :key="icon" :icon="icon" />
+    <div v-for="icon in icons" :key="icon" :class="icon" />
     <div @click="getTest">getTest</div>
     <div @click="postTest">postTest</div>
     <div @click="setUserInfo({ name: 'allen', token: String(Math.random()) })">setUserInfo</div>
@@ -30,7 +30,7 @@ const { userInfo, setUserInfo } = useStore('user')
 
 const dateVal = ref(new Date())
 
-const icons = ['foundation-indent-more', 'foundation-indent-less', '']
+const icons = ['foundation-indent-more', 'foundation-indent-less']
 
 async function getTest() {
   const res = await apiTest.getTest({ a: 1 })
