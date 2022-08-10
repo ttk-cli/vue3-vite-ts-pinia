@@ -42,3 +42,18 @@ ts 类型声明在带来类型提示，减少编程过程中 bug 率的同时，
 将接口返回的`JSON`数据通过`json2ts`进行解析，然后直接 cv 即可。
 
 [相关链接](http://json2ts.com/)
+
+### husky 未执行
+
+**原因：**
+
+`pre-commit`,`commit-msg`自定义的钩子在执行中权限不足，无法被执行。
+
+**解决方法：**
+
+- 增加文件的执行权限。
+
+  ```shell
+  chmod +x ./.husky/pre-commit
+  chmod +x ./.husky/commit-msg
+  ```
