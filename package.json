@@ -63,7 +63,7 @@
     "unplugin-vue-components": "0.21.1",
     "vite": "2.9.12",
     "vue-global-api": "0.4.1",
-    "vue-tsc": "0.34.10"
+    "vue-tsc": "0.40.13"
   },
   "engines": {
     "node": ">=16.0.0"
