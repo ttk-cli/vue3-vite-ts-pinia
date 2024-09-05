@@ -34,12 +34,14 @@ const icons = ['foundation-indent-more', 'foundation-indent-less']
 
 async function getTest() {
   const res = await apiTest.getTest({ a: 1 })
+  if (!res) return
   console.log(res, 111)
   // res.data.age
   // res.data.name
 }
 async function postTest() {
   const res = await apiTest.postTest({ a: 2 })
+  if (!res) return
   // res.data.val
 }
 </script>
