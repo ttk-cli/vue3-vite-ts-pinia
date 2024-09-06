@@ -6,7 +6,7 @@
     <div>name:{{ name }}</div>
     <div>fullName:{{ fullName }}</div>
     <div @click="updateName('333')">updateName</div>
-    <el-button class="m10 w200 br10 c-#387">I am ElButton</el-button>
+    <el-button class="m-10 w-200 br-10 c-#387">I am ElButton</el-button>
     <el-date-picker v-model="dateVal" type="date" placeholder="Pick a day" />
     <div v-for="icon in icons" :key="icon" :class="icon" />
     <div @click="getTest">getTest</div>

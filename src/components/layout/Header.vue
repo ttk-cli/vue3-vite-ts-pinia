@@ -5,9 +5,9 @@
         <div
           :class="[
             isCollapse ? 'foundation-indent-less' : 'foundation-indent-more',
-            'w30',
-            'h30',
-            'mx10',
+            'w-30',
+            'h-30',
+            'mx-10',
           ]"
         />
       </div>
