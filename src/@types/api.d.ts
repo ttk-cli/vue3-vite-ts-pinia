@@ -1,6 +1,7 @@
 declare namespace GetTest {
   interface params {
     a: number
+    isLoading?: boolean
   }
   interface data {
     name: string

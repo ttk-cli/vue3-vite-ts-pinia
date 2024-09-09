@@ -24,7 +24,7 @@ const dateVal = ref(new Date())
 const icons = ['foundation-indent-more', 'foundation-indent-less']
 
 async function getTest() {
-  const res = await apiTest.getTest({ a: 1 })
+  const res = await apiTest.getTest({ a: 1, isLoading: true })
   if (!res) return
   console.log(res, 111)
   // res.data.age

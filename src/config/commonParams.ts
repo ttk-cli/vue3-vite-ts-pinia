@@ -1,5 +1,5 @@
 const commonParams = {
-  isLoading: true,
+  // ...
 }
 
 export function getCommonParams() {

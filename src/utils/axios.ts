@@ -34,7 +34,7 @@ methods.forEach(
       }
 
       return new Promise<any>((resolve) => {
-        if (fullParams.isLoading) loadingShow()
+        if (isLoading) loadingShow()
         axios(axiosOptions)
           .then(({ data }) => {
             const { fedLogout } = useStore('user')
@@ -64,7 +64,7 @@ methods.forEach(
             resolve(null)
           })
           .finally(() => {
-            if (fullParams.isLoading) loadingClose()
+            if (isLoading) loadingClose()
           })
       })
     }),
