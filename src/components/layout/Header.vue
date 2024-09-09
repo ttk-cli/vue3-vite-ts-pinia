@@ -1,62 +1,6 @@
-<template>
-  <div class="breadcrumb">
-    <div class="flex items-center">
-      <div class="collapse-icon" @click="updateCollapse">
-        <div
-          :class="[
-            isCollapse ? 'foundation-indent-less' : 'foundation-indent-more',
-            'w-30',
-            'h-30',
-            'mx-10',
-          ]"
-        />
-      </div>
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item to="/">控制台</el-breadcrumb-item>
-        <transition-group name="breadcrumb">
-          <el-breadcrumb-item v-for="item in breadcrumbArr" :key="item">
-            {{ item }}
-          </el-breadcrumb-item>
-        </transition-group>
-      </el-breadcrumb>
-    </div>
-    <div class="logout" @click="logout">退出</div>
-  </div>
-  <div class="tabs">
-    <transition-group name="tabs">
-      <div
-        v-for="(item, index) in tabs"
-        :key="item.name"
-        class="tab-item"
-        :class="{ 'tab-active': item.name === route.path }"
-        draggable="true"
-        @click="tabClick(item.name, false)"
-        @contextmenu.prevent="rightClick($event, item.name)"
-        @dragenter="dragenter($event, index)"
-        @dragover="dragover($event)"
-        @dragstart="dragstart(index)"
-      >
-        <div v-show="item.name === route.path" class="circle"></div>
-        <div class="content">{{ item.title }}</div>
-        <div
-          class="carbon:close hover:carbon:close-filled close-icon"
-          @click.stop="tabRemove(item.name)"
-        ></div>
-      </div>
-    </transition-group>
-    <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
-      <li @click="tabRemove()">关闭</li>
-      <li @click="tabRemoveOther">关闭其他</li>
-      <li @click="tabRemoveRight">关闭到右侧</li>
-      <li @click="tabRemoveAll">关闭所有</li>
-    </ul>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { onBeforeRouteUpdate, RouteLocationRaw } from 'vue-router'
-
-import { lastItem } from '@/utils/shared'
+import type { RouteLocationRaw } from 'vue-router'
+import { onBeforeRouteUpdate } from 'vue-router'
 
 const { logout } = useStore('user')
 
@@ -74,15 +18,14 @@ const {
 const route = useRoute()
 const router = useRouter()
 
-//面包屑
+// 面包屑
 const breadcrumbArr = computed(() => {
-  const arr = route.meta.title as string[]
-  return arr.filter((i: string) => i !== '控制台')
+  return route.matched.filter((item) => !['/', '/dashboard'].includes(item.path))
 })
 
 // 更新头部tabs
-onBeforeRouteUpdate((to, from, next) => {
-  const tab = { title: lastItem(to.meta.title as string[]), name: to.path }
+onBeforeRouteUpdate((to, _from, next) => {
+  const tab = { title: to.meta.title, name: to.path }
   addTab(tab)
   next()
 })
@@ -99,7 +42,7 @@ function tabClick(val: number | string = 0, delay = true) {
     () => {
       router.push(path)
     },
-    delay ? 200 : 0
+    delay ? 200 : 0,
   )
 }
 
@@ -147,7 +90,7 @@ watch(visible, (curAge) => {
   }
 })
 
-//tabs拖拽
+// tabs拖拽
 let dragIndex = 0
 
 function dragstart(index: number) {
@@ -168,6 +111,59 @@ function dragenter(e: { preventDefault: () => void }, index: number) {
   }
 }
 </script>
+
+<template>
+  <div class="breadcrumb">
+    <div class="flex items-center">
+      <div class="collapse-icon" @click="updateCollapse">
+        <div
+          class="mx-10 h-30 w-30"
+          :class="[isCollapse ? 'foundation-indent-less' : 'foundation-indent-more']"
+        />
+      </div>
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item to="/"> dashboard </el-breadcrumb-item>
+        <transition-group name="breadcrumb">
+          <el-breadcrumb-item v-for="item in breadcrumbArr" :key="item.path">
+            {{ item.meta.title }}
+          </el-breadcrumb-item>
+        </transition-group>
+      </el-breadcrumb>
+    </div>
+    <div class="logout" @click="logout">退出</div>
+  </div>
+  <div class="tabs">
+    <transition-group name="tabs">
+      <div
+        v-for="(item, index) in tabs"
+        :key="item.name"
+        class="tab-item"
+        :class="{ 'tab-active': item.name === route.path }"
+        draggable="true"
+        @click="tabClick(item.name, false)"
+        @contextmenu.prevent="rightClick($event, item.name)"
+        @dragenter="dragenter($event, index)"
+        @dragover="dragover($event)"
+        @dragstart="dragstart(index)"
+      >
+        <div v-show="item.name === route.path" class="circle" />
+        <div class="content">
+          {{ item.title }}
+        </div>
+        <div
+          class="carbon:close close-icon hover:carbon:close-filled"
+          @click.stop="tabRemove(item.name)"
+        />
+      </div>
+    </transition-group>
+    <ul v-show="visible" :style="{ left: `${left}px`, top: `${top}px` }" class="contextmenu">
+      <li @click="tabRemove()">关闭</li>
+      <li @click="tabRemoveOther">关闭其他</li>
+      <li @click="tabRemoveRight">关闭到右侧</li>
+      <li @click="tabRemoveAll">关闭所有</li>
+    </ul>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .breadcrumb {

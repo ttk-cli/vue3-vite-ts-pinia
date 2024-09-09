@@ -1,4 +1,4 @@
-const defaultTab: App.Tab = { title: '控制台', name: '/' }
+const defaultTab: App.Tab = { title: 'dashboard', name: '/dashboard' }
 
 export default defineStore({
   id: 'app',

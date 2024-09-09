@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import { APP_NAME } from '@/config/app'
+import router from '~pages'
+
+const route = useRoute()
+const { isCollapse } = useStore('app')
+const menus = getMenus(router, '')
+
+function getMenus(route: any, path: string) {
+  return route
+    .sort((a: any, b: any) => a.meta.sort - b.meta.sort)
+    .map((item: any) => {
+      if (item.children && item.children.length > 0) {
+        return {
+          ...item,
+          path: `${path}${item.path}`,
+          children: getMenus(item.children, `${path}${item.path}/`),
+        }
+      }
+      return {
+        ...item,
+        path: `${path}${item.path}`,
+      }
+    })
+}
+</script>
+
 <template>
   <el-scrollbar height="100vh">
     <el-menu
@@ -9,34 +36,10 @@
       active-text-color="#409EFF"
       :data-text="APP_NAME"
     >
-      <TreeMenu :menus="treeMenus"></TreeMenu>
+      <TreeMenu :menus="menus" />
     </el-menu>
   </el-scrollbar>
 </template>
-
-<script setup lang="ts">
-import { APP_NAME } from '@/config/app'
-import router from '@/utils/router'
-
-const route = useRoute()
-// 菜单
-const routers = router.find((i) => i.path === '/')?.children
-const treeMenus = getTreeMenus(routers)
-
-function getTreeMenus(menus: any, treeMenus: any = [], level = 1) {
-  const targetMenus = menus.filter((i: any) => i.meta.title.length === level)
-  if (targetMenus.length === 0) return treeMenus
-  targetMenus.forEach((i: any) => {
-    if (i.meta.hasChild) {
-      i.children = getTreeMenus(menus, [], level + 1)
-    }
-    treeMenus.push(i)
-  })
-  return treeMenus
-}
-
-const { isCollapse } = useStore('app')
-</script>
 
 <style lang="scss" scoped>
 .el-menu {

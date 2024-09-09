@@ -1,9 +1,14 @@
 // "https://github.com/Allen-1998/pinia-auto-refs"
-import { AutoToRefs, ToRef } from 'vue'
+/* eslint-disable */
+/* prettier-ignore */
+// @ts-nocheck
+import type { AutoToRefs, ToRef } from 'vue'
 
 import appStore from '@/store/app'
 import testStore from '@/store/test'
 import userStore from '@/store/user'
+
+import store from '@/store'
 
 declare module 'vue' {
   export type AutoToRefs<T> = {
@@ -18,7 +23,7 @@ const storeExports = {
 }
 
 export function useStore<T extends keyof typeof storeExports>(storeName: T) {
-  const store = storeExports[storeName]()
-  const storeRefs = storeToRefs(store)
-  return { ...store, ...storeRefs } as unknown as AutoToRefs<ReturnType<typeof storeExports[T]>>
+  const targetStore = storeExports[storeName](store)
+  const storeRefs = storeToRefs(targetStore)
+  return { ...targetStore, ...storeRefs } as unknown as AutoToRefs<ReturnType<typeof storeExports[T]>>
 }

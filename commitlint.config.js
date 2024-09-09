@@ -3,7 +3,7 @@ module.exports = {
   rules: {
     // 'subject-case': [0, 'never'],
     'type-enum': [
-      2, //代表必须输入
+      2, // 代表必须输入
       'always',
       [
         'feat', // 一个新的特性

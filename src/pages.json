@@ -1,9 +1,0 @@
-{
-  "dashboard": { "title": ["控制台"], "icon": "clarity:dashboard-solid" },
-  "test1": { "title": ["test1"], "icon": "carbon:rule-test", "hasChild": true },
-  "test1_1": { "title": ["test1", "test1_1"], "icon": "carbon:rule-test", "hasChild": true },
-  "test1_1_1": { "title": ["test1", "test1_1", "test1_1_1"], "icon": "carbon:rule-test" },
-  "test1_2": { "title": ["test1", "test1_2"], "icon": "carbon:rule-test" },
-  "test2": { "title": ["test2"], "icon": "logos:vitest" },
-  "test3": { "title": ["test3"], "icon": "logos:vitest" }
-}

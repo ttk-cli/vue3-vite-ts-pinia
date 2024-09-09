@@ -1,8 +1,9 @@
 // https://github.com/unocss/unocss
 import presetRemToPx from '@unocss/preset-rem-to-px'
-import { defineConfig, Preset, presetIcons, presetUno } from 'unocss'
+import type { Preset } from 'unocss'
+import { defineConfig, presetIcons, presetUno } from 'unocss'
 
-export const createConfig = () => {
+export function createConfig() {
   return defineConfig({
     presets: [
       presetUno(),

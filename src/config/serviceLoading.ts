@@ -3,7 +3,8 @@ let loadingCount = 0
 
 export function loadingShow() {
   loadingCount += 1
-  if (loadingCount > 1) return
+  if (loadingCount > 1)
+    return
   loadingInstance = ElLoading.service({
     text: 'Loading...',
   })
@@ -11,6 +12,7 @@ export function loadingShow() {
 
 export function loadingClose() {
   loadingCount -= 1
-  if (loadingCount > 0) return
+  if (loadingCount > 0)
+    return
   loadingInstance.close()
 }

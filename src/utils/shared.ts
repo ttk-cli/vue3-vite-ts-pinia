@@ -4,12 +4,12 @@ export function lastItem<T>(arr: T[]) {
 
 export function isValidKey(
   object: object,
-  key: string | number | symbol
+  key: string | number | symbol,
 ): key is keyof typeof object {
   return key in object
 }
 
-export function stringify(obj: Object, prefix = '&') {
+export function stringify(obj: object, prefix = '&') {
   let str = ''
   for (const key in obj) {
     if (isValidKey(obj, key)) {

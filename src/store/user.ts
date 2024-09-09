@@ -19,12 +19,12 @@ export default defineStore({
     setUserInfo(userInfo: User.UserInfo) {
       this.userInfo = userInfo
     },
-    //后端退出
+    // 后端退出
     async logout() {
       // await apiUser.logout()
       this.fedLogout()
     },
-    //前端退出
+    // 前端退出
     fedLogout() {
       this.setUserInfo({
         name: '',

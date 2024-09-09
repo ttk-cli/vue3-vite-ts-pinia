@@ -1,7 +1,3 @@
-<template>
-  <div @click="login">login</div>
-</template>
-
 <script lang="ts" setup>
 const { setUserInfo } = useStore('user')
 const router = useRouter()
@@ -13,3 +9,9 @@ function login() {
   router.push('/')
 }
 </script>
+
+<template>
+  <div @click="login">
+    login
+  </div>
+</template>

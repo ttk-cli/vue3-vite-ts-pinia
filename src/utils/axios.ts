@@ -1,14 +1,14 @@
-import Axios, { AxiosRequestConfig } from 'axios'
+import type { AxiosRequestConfig } from 'axios'
+import Axios from 'axios'
 
+import { stringify } from './shared'
 import { API_BASE_URL } from '@/config/app'
 import { getCommonParams } from '@/config/commonParams'
 import { loadingClose, loadingShow } from '@/config/serviceLoading'
 
-import { stringify } from './shared'
-
 const axios = Axios.create({
   baseURL: API_BASE_URL,
-  timeout: 20000, // 请求超时 20s
+  timeout: 10000,
   responseType: 'json',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -67,6 +67,6 @@ methods.forEach(
             if (fullParams.isLoading) loadingClose()
           })
       })
-    })
+    }),
 )
 export default axios

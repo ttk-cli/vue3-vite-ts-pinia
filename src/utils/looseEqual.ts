@@ -1,7 +1,8 @@
 import { isArray, isDate, isObject, isSymbol } from './is'
 
 function looseCompareArrays(a: any[], b: any[]) {
-  if (a.length !== b.length) return false
+  if (a.length !== b.length)
+    return false
   let equal = true
   for (let i = 0; equal && i < a.length; i++) {
     equal = looseEqual(a[i], b[i])
@@ -10,7 +11,8 @@ function looseCompareArrays(a: any[], b: any[]) {
 }
 
 export function looseEqual(a: any, b: any): boolean {
-  if (a === b) return true
+  if (a === b)
+    return true
   let aValidType = isDate(a)
   let bValidType = isDate(b)
   if (aValidType || bValidType) {

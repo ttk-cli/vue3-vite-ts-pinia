@@ -12,7 +12,7 @@ export default defineStore({
   },
   getters: {
     fullName: ({ name }) => {
-      return name + '丰'
+      return `${name}丰`
     },
   },
   actions: {

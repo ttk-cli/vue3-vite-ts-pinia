@@ -1,17 +1,33 @@
 import 'nprogress/nprogress.css'
 
-// 进度条
 import NProgress from 'nprogress'
 import { createRouter, createWebHistory } from 'vue-router'
 
-import routes from '@/utils/router'
+import routes from '~pages'
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../pages/login.vue'),
+    },
+    {
+      path: '/',
+      name: 'index',
+      redirect: '/dashboard',
+      component: () => import('../pages/index.vue'),
+      children: [
+        ...routes,
+        { path: '/404', name: '404', component: () => import('../pages/404.vue') },
+        { path: '/:catchAll(.*)', redirect: '/404' },
+      ],
+    },
+  ],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   NProgress.start()
   if (to.path === '/login') return next()
   const { logged } = useStore('user')
