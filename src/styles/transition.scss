@@ -1,25 +1,22 @@
 /* breadcrumb transition */
-.breadcrumb-enter-active,
+.breadcrumb-enter-active {
+  transition: all 0.6s;
+}
 .breadcrumb-leave-active {
-  transition: all 0.5s;
+  position: absolute;
+  transition: all 0.6s;
 }
 .breadcrumb-enter-from,
 .breadcrumb-leave-active {
   opacity: 0;
-  transform: translateX(200%) translateY(-100%);
-}
-.breadcrumb-move {
-  transition: all 0.5s;
-}
-.breadcrumb-leave-active {
-  position: absolute;
+  transform: translateX(30px);
 }
 /* fade-transform */
 .fade-transform-enter-active {
-  animation: 0.5s slidein;
+  animation: 0.3s slidein;
 }
 .fade-transform-leave-active {
-  animation: 0.5s slideout;
+  animation: 0.3s slideout;
 }
 @keyframes slidein {
   from {
