@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { RouteLocationRaw } from 'vue-router'
+import type { RouteLocationRaw, RouteRecordNameGeneric } from 'vue-router'
 import { onBeforeRouteUpdate } from 'vue-router'
 
 const { logout } = useStore('user')
@@ -25,22 +25,24 @@ const breadcrumbArr = computed(() => {
 
 // 更新头部tabs
 onBeforeRouteUpdate((to, _from, next) => {
-  const tab = { title: to.meta.title, name: to.path }
+  const tab = { title: to.meta.title, name: to.name }
   addTab(tab)
   next()
 })
 
 // 切换tabs
 function tabClick(val: number | string = 0, delay = true) {
-  let path: RouteLocationRaw
+  let name: RouteRecordNameGeneric
   if (typeof val === 'number') {
-    path = tabs.value[val].name
+    name = tabs.value[val].name
   } else {
-    path = val
+    name = val
   }
   setTimeout(
     () => {
-      router.push(path)
+      router.push({
+        name,
+      })
     },
     delay ? 200 : 0,
   )
@@ -63,7 +65,7 @@ function closeMenu() {
 function tabRemove(name: string = clickName) {
   const index = tabs.value.findIndex((i: App.Tab) => i.name === name)
   removeTab(name)
-  if (route.path === name) {
+  if (route.name === name) {
     const nextTabIndex = index > tabs.value.length - 1 ? tabs.value.length - 1 : index
     tabClick(nextTabIndex)
   }
@@ -74,7 +76,7 @@ function tabRemoveOther() {
 }
 function tabRemoveRight() {
   removeRightTab(clickName)
-  if (tabs.value.every((i: App.Tab) => i.name !== route.path)) {
+  if (tabs.value.every((i: App.Tab) => i.name !== route.name)) {
     tabClick(clickName)
   }
 }
@@ -138,7 +140,7 @@ function dragenter(e: { preventDefault: () => void }, index: number) {
         v-for="(item, index) in tabs"
         :key="item.name"
         class="tab-item"
-        :class="{ 'tab-active': item.name === route.path }"
+        :class="{ 'tab-active': item.name === route.name }"
         draggable="true"
         @click="tabClick(item.name, false)"
         @contextmenu.prevent="rightClick($event, item.name)"
@@ -146,7 +148,7 @@ function dragenter(e: { preventDefault: () => void }, index: number) {
         @dragover="dragover($event)"
         @dragstart="dragstart(index)"
       >
-        <div v-show="item.name === route.path" class="circle" />
+        <div v-show="item.name === route.name" class="circle" />
         <div class="content">
           {{ item.title }}
         </div>
