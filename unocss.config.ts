@@ -19,7 +19,6 @@ export function createConfig() {
         baseFontSize: 4,
       }) as Preset,
     ],
-    include: [/\.vue$/, /pages.json$/],
   })
 }
 
