@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { RouteLocationRaw, RouteRecordNameGeneric } from 'vue-router'
+import type { RouteRecordNameGeneric } from 'vue-router'
 import { onBeforeRouteUpdate } from 'vue-router'
 
 const { logout } = useStore('user')

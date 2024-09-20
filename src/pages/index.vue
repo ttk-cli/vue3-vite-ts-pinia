@@ -1,5 +1,18 @@
 <script lang="ts" setup>
 const { tabs } = useStore('app')
+
+const router = useRouter()
+const routes = router.getRoutes()
+const needCacheRouteNames = routes
+  .filter((item) => item.meta && !item.meta.notCache)
+  .map((item) => item.name)
+
+const cacheList = computed(() => {
+  const arr = tabs.value
+    .map((item) => item.name)
+    .filter((item) => needCacheRouteNames.includes(item))
+  return arr
+})
 </script>
 
 <template>
@@ -14,7 +27,7 @@ const { tabs } = useStore('app')
       <el-main>
         <router-view v-slot="{ Component, route }">
           <transition name="fade-transform" mode="out-in">
-            <keep-alive :include="tabs.map((i) => i.name)">
+            <keep-alive :include="cacheList">
               <component :is="Component" :key="route.name" />
             </keep-alive>
           </transition>
