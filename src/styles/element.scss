@@ -16,3 +16,25 @@
   overflow-y: scroll;
   margin-top: 40px;
 }
+.el-input {
+  .el-input__suffix:not(.el-select .el-input__suffix) {
+    margin-left: -22px;
+  }
+  .el-input__inner:not(.el-select .el-input__inner) {
+    padding-right: 22px;
+  }
+}
+.el-table .cell {
+  @extend .empty-del;
+}
+.el-form--inline {
+  .el-form-item {
+    .el-input,
+    .el-cascader,
+    .el-select,
+    .el-date-editor,
+    .el-autocomplete {
+      width: 240px;
+    }
+  }
+}

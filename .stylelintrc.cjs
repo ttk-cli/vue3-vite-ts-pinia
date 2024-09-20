@@ -41,13 +41,7 @@ module.exports = {
         ],
       },
     ],
-    'selector-class-pattern': [
-      '^[a-zA-Z0-9-]*$',
-      {
-        message:
-          'Selector class name must start with a letter and contain only letters and numbers',
-      },
-    ],
+    'selector-class-pattern': null,
     'selector-type-no-unknown': [true, { ignoreTypes: ['page', 'radio', 'checkbox'] }],
     'number-leading-zero': 'always',
     'declaration-block-no-redundant-longhand-properties': null,

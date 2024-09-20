@@ -9,6 +9,26 @@ a {
   text-decoration: none;
   color: #409eff;
 }
+.link {
+  cursor: pointer;
+  color: #136ee9;
+  &:hover {
+    color: #79bbff;
+  }
+  &:not(:last-of-type) {
+    margin-right: 10px;
+  }
+}
+.link-disabled {
+  cursor: not-allowed;
+  color: #a8abb2;
+  &:hover {
+    color: #a8abb2;
+  }
+}
+.empty-del:empty::after {
+  content: '--';
+}
 ::-webkit-scrollbar {
   /* 滚动条整体样式 */
   width: 5px; /* 高宽分别对应横竖滚动条的尺寸 */
