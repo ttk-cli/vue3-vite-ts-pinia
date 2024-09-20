@@ -8,6 +8,7 @@ const menus = getMenus(router, '')
 
 function getMenus(route: any, path: string) {
   return route
+    .filter((item: any) => item.meta && item.meta.sort)
     .sort((a: any, b: any) => a.meta.sort - b.meta.sort)
     .map((item: any) => {
       if (item.children && item.children.length > 0) {
