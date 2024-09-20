@@ -70,13 +70,18 @@ function getMenus(route: any, path: string) {
   width: 70px;
   &::before {
     width: 70px;
-    content: 'ADMIN';
+    background-image: url('@/assets/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 70%;
+    content: '';
   }
 }
 .v-leave-to {
   width: 200px;
   &::before {
     width: 200px;
+    background-image: none;
     content: attr(data-text);
   }
 }

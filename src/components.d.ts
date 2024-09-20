@@ -23,7 +23,6 @@ declare module 'vue' {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     Header: typeof import('./components/layout/Header.vue')['default']
-    Icon: typeof import('./components/base/Icon.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TreeMenu: typeof import('./components/base/TreeMenu.vue')['default']
