@@ -14,7 +14,7 @@ const { tabs } = useStore('app')
       <el-main>
         <router-view v-slot="{ Component, route }">
           <transition name="fade-transform" mode="out-in">
-            <keep-alive :include="tabs.map((i: any) => i.name)">
+            <keep-alive :include="tabs.map((i) => i.name)">
               <component :is="Component" :key="route.name" />
             </keep-alive>
           </transition>

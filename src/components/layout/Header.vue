@@ -25,7 +25,7 @@ const breadcrumbArr = computed(() => {
 
 // 更新头部tabs
 onBeforeRouteUpdate((to, _from, next) => {
-  const tab = { title: to.meta.title, name: to.name }
+  const tab = { title: to.meta.title, name: to.name } as App.Tab
   addTab(tab)
   next()
 })
