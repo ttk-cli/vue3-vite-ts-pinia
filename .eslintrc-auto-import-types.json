@@ -1,7 +1,6 @@
 {
   "globals": {
-    "GetTest": true,
-    "PostTest": true,
+    "ApiTest": true,
     "Types": true,
     "App": true,
     "User": true,

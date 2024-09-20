@@ -22,6 +22,10 @@ export default antfu(
       'prefer-arrow-callback': 'off',
       'no-console': 'off',
       'vue/custom-event-name-casing': 'off',
+      'vue/html-self-closing': 'off',
+      'style/operator-linebreak': 'off',
+      'antfu/consistent-list-newline': 'off',
+      'ts/no-unused-expressions': 'off',
     },
   },
 )

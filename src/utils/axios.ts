@@ -15,13 +15,13 @@ const axios = Axios.create({
   },
 })
 
-type Method = 'get' | 'post'
-const methods: Method[] = ['get', 'post']
+const methods = ['get', 'post'] as const
+const MAX_RETRIES = 3 // 最大重试次数
 
 methods.forEach(
-  (method: Method) =>
+  (method) =>
     (axios[method] = (url: string, params: any = {}) => {
-      const { isLoading, ...otherParams } = params
+      const { isLoading = false, isHideError = false, retries = 0, ...otherParams } = params
       const fullParams = { ...getCommonParams(), ...otherParams }
       const axiosOptions: AxiosRequestConfig = {
         method,
@@ -43,23 +43,33 @@ methods.forEach(
                 resolve(data)
                 break
               case 1000:
-                ElMessage.error(`${data.msg}`)
+                !isHideError && ElMessage.error(`${data.msg}`)
                 fedLogout()
                 resolve(null)
                 break
 
               default:
-                ElMessage.error(`${data.msg}`)
+                !isHideError && ElMessage.error(`${data.msg}`)
                 resolve(null)
                 break
             }
           })
-          .catch((error: any) => {
+          .catch(async (error: any) => {
+            // 只对网络原因失败重试
+            if (retries > 0) {
+              resolve(
+                await axios[method](url, {
+                  ...params,
+                  retries: Math.min(retries - 1, MAX_RETRIES),
+                }),
+              )
+              return
+            }
             if (error.response && error.response.data) {
               const msg = error.response.data.message
-              ElMessage.error(`${msg}`)
+              !isHideError && ElMessage.error(`${msg}`)
             } else {
-              ElMessage.error('服务器连接超时')
+              !isHideError && ElMessage.error('服务器连接超时')
             }
             resolve(null)
           })

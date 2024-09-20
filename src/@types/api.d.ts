@@ -1,19 +1,9 @@
-declare namespace GetTest {
-  interface params {
-    a: number
-    isLoading?: boolean
-  }
-  interface data {
+declare namespace ApiTest {
+  interface GetData {
     name: string
     age: number
   }
-}
-
-declare namespace PostTest {
-  interface params {
-    a: number
-  }
-  interface data {
+  interface PostData {
     val: string
   }
 }

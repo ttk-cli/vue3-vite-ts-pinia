@@ -1,8 +1,8 @@
 import axios from '@/utils/axios'
 
 const apiTest = {
-  getTest: (params: GetTest.params) => axios.get<GetTest.data>('/test', params),
-  postTest: (params: PostTest.params) => axios.post<PostTest.data>('/test', params),
+  getTest: (params = {}) => axios.get<ApiTest.GetData>('/test', params),
+  postTest: (params = {}) => axios.post<ApiTest.PostData>('/test', params),
 }
 
 export default apiTest
