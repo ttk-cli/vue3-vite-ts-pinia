@@ -44,12 +44,13 @@ function getMenus(route: any, path: string) {
 
 <style lang="scss" scoped>
 .el-menu {
-  margin-top: 60px;
+  position: relative;
+  padding-top: 60px;
   border-right: 0;
   width: 200px;
   &::before {
     overflow: hidden;
-    position: fixed;
+    position: absolute;
     top: 0;
     z-index: 10;
     box-sizing: border-box;
