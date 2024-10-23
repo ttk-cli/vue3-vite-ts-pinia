@@ -11,7 +11,7 @@
       "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["element-plus/global"],
+    "types": ["element-plus/global", "unplugin-vue-router/client", "vite-plugin-vue-layouts/client"],
     "strict": true,
     "sourceMap": true,
     "esModuleInterop": true,
@@ -19,5 +19,5 @@
     "skipLibCheck": true
   },
   "references": [{ "path": "./tsconfig.node.json" }],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "./typed-router.d.ts"]
 }

@@ -2,29 +2,13 @@ import 'nprogress/nprogress.css'
 
 import NProgress from 'nprogress'
 import { createRouter, createWebHistory } from 'vue-router'
+import { setupLayouts } from 'virtual:generated-layouts'
 
-import routes from '~pages'
+import { routes } from 'vue-router/auto-routes'
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../pages/login.vue'),
-    },
-    {
-      path: '/',
-      name: 'index',
-      redirect: '/dashboard',
-      component: () => import('../pages/index.vue'),
-      children: [
-        ...routes,
-        { path: '/404', name: '404', component: () => import('../pages/404.vue') },
-        { path: '/:catchAll(.*)', redirect: '/404' },
-      ],
-    },
-  ],
+  routes: setupLayouts(routes),
 })
 
 router.beforeEach((to, _from, next) => {
@@ -32,6 +16,11 @@ router.beforeEach((to, _from, next) => {
   if (to.path === '/login') return next()
   const { logged } = useStore('user')
   if (!logged.value) return next('/login')
+  const { addTab } = useStore('app')
+  if (to.meta.title) {
+    const tab = { title: to.meta.title, name: to.name } as App.Tab
+    addTab(tab)
+  }
   next()
 })
 

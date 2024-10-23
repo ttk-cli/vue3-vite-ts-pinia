@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import type { RouteRecordNameGeneric } from 'vue-router'
-import { onBeforeRouteUpdate } from 'vue-router'
-
 const { logout } = useStore('user')
 
 const {
   isCollapse,
   tabs,
   updateCollapse,
-  addTab,
   removeTab,
   removeOtherTab,
   removeRightTab,
@@ -20,21 +16,12 @@ const router = useRouter()
 
 // 面包屑
 const breadcrumbArr = computed(() => {
-  return route.matched.filter((item) => !['/', '/dashboard'].includes(item.path))
-})
-
-// 更新头部tabs
-onBeforeRouteUpdate((to, _from, next) => {
-  if (to.meta.title) {
-    const tab = { title: to.meta.title, name: to.name } as App.Tab
-    addTab(tab)
-  }
-  next()
+  return route.matched.filter((item) => !['/'].includes(item.path) && item.meta.title)
 })
 
 // 切换tabs
 function tabClick(val: number | string = 0, delay = true) {
-  let name: RouteRecordNameGeneric
+  let name: any
   if (typeof val === 'number') {
     name = tabs.value[val].name
   } else {

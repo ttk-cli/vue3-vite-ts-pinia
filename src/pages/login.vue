@@ -1,3 +1,11 @@
+<route lang="json">
+{
+  "meta": {
+    "layout": false
+  }
+}
+</route>
+
 <script lang="ts" setup>
 const { setUserInfo } = useStore('user')
 const router = useRouter()
@@ -11,7 +19,5 @@ function login() {
 </script>
 
 <template>
-  <div @click="login">
-    login
-  </div>
+  <div @click="login">login</div>
 </template>

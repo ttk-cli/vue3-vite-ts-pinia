@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { routes } from 'vue-router/auto-routes'
 import { APP_NAME } from '@/config/app'
-import router from '~pages'
 
 const route = useRoute()
 const { isCollapse } = useStore('app')
-const menus = getMenus(router, '')
+const menus = getMenus(routes, '')
 
 function getMenus(route: any, path: string) {
   return route
