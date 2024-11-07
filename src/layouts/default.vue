@@ -11,6 +11,7 @@ const cacheList = computed(() => {
   const arr = tabs.value
     .map((item) => item.name)
     .filter((item) => needCacheRouteNames.includes(item))
+    .map((item) => item.replace(/^\//, ''))
   return arr
 })
 </script>
