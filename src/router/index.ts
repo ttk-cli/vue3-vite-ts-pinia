@@ -18,7 +18,7 @@ router.beforeEach((to, _from, next) => {
   if (!logged.value) return next('/login')
   const { addTab } = useStore('app')
   if (to.meta.title) {
-    const tab = { title: to.meta.title, name: to.name } as App.Tab
+    const tab = { title: to.meta.title, fullPath: to.fullPath } as App.Tab
     addTab(tab)
   }
   next()

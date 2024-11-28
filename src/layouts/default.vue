@@ -5,11 +5,11 @@ const router = useRouter()
 const routes = router.getRoutes()
 const needCacheRouteNames = routes
   .filter((item) => item.meta && !item.meta.notCache)
-  .map((item) => item.name)
+  .map((item) => item.fullPath)
 
 const cacheList = computed(() => {
   const arr = tabs.value
-    .map((item) => item.name)
+    .map((item) => item.fullPath.replace(/\?.*$/, ''))
     .filter((item) => needCacheRouteNames.includes(item))
     .map((item) => item.replace(/^\//, ''))
   return arr
@@ -29,7 +29,7 @@ const cacheList = computed(() => {
         <router-view v-slot="{ Component, route }">
           <transition name="fade-transform" mode="out-in">
             <keep-alive :include="cacheList">
-              <component :is="Component" :key="route.name" />
+              <component :is="Component" :key="route.fullPath" />
             </keep-alive>
           </transition>
         </router-view>

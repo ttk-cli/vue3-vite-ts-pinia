@@ -21,16 +21,16 @@ const breadcrumbArr = computed(() => {
 
 // 切换tabs
 function tabClick(val: number | string = 0, delay = true) {
-  let name: any
+  let fullPath: any
   if (typeof val === 'number') {
-    name = tabs.value[val].name
+    fullPath = tabs.value[val].fullPath
   } else {
-    name = val
+    fullPath = val
   }
   setTimeout(
     () => {
       router.push({
-        name,
+        fullPath,
       })
     },
     delay ? 200 : 0,
@@ -42,8 +42,8 @@ const visible = ref(false)
 const top = ref(0)
 const left = ref(0)
 let clickName = ''
-function rightClick(e: { x: number; y: number }, name: string) {
-  clickName = name
+function rightClick(e: { x: number; y: number }, fullPath: string) {
+  clickName = fullPath
   left.value = e.x + 5
   top.value = e.y + 5
   visible.value = true
@@ -51,10 +51,10 @@ function rightClick(e: { x: number; y: number }, name: string) {
 function closeMenu() {
   visible.value = false
 }
-function tabRemove(name: string = clickName) {
-  const index = tabs.value.findIndex((i: App.Tab) => i.name === name)
-  removeTab(name)
-  if (route.name === name) {
+function tabRemove(fullPath: string = clickName) {
+  const index = tabs.value.findIndex((i: App.Tab) => i.fullPath === fullPath)
+  removeTab(fullPath)
+  if (route.fullPath === fullPath) {
     const nextTabIndex = index > tabs.value.length - 1 ? tabs.value.length - 1 : index
     tabClick(nextTabIndex)
   }
@@ -65,7 +65,7 @@ function tabRemoveOther() {
 }
 function tabRemoveRight() {
   removeRightTab(clickName)
-  if (tabs.value.every((i: App.Tab) => i.name !== route.name)) {
+  if (tabs.value.every((i: App.Tab) => i.fullPath !== route.fullPath)) {
     tabClick(clickName)
   }
 }
@@ -127,23 +127,23 @@ function dragenter(e: { preventDefault: () => void }, index: number) {
     <transition-group name="tabs">
       <div
         v-for="(item, index) in tabs"
-        :key="item.name"
+        :key="item.fullPath"
         class="tab-item"
-        :class="{ 'tab-active': item.name === route.name }"
+        :class="{ 'tab-active': item.fullPath === route.fullPath }"
         draggable="true"
-        @click="tabClick(item.name, false)"
-        @contextmenu.prevent="rightClick($event, item.name)"
+        @click="tabClick(item.fullPath, false)"
+        @contextmenu.prevent="rightClick($event, item.fullPath)"
         @dragenter="dragenter($event, index)"
         @dragover="dragover($event)"
         @dragstart="dragstart(index)"
       >
-        <div v-show="item.name === route.name" class="circle" />
+        <div v-show="item.fullPath === route.fullPath" class="circle" />
         <div class="content">
           {{ item.title }}
         </div>
         <div
           class="carbon:close close-icon hover:carbon:close-filled"
-          @click.stop="tabRemove(item.name)"
+          @click.stop="tabRemove(item.fullPath)"
         />
       </div>
     </transition-group>

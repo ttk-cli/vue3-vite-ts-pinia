@@ -1,7 +1,7 @@
 declare namespace App {
   interface Tab {
     title: string
-    name: string
+    fullPath: string
   }
 }
 
