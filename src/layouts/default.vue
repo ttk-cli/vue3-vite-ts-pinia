@@ -4,8 +4,8 @@ const { tabs } = useStore('app')
 const router = useRouter()
 const routes = router.getRoutes()
 const needCacheRouteNames = routes
-  .filter((item) => item.meta && !item.meta.notCache)
-  .map((item) => item.fullPath)
+  .filter((item) => item.name && item.meta && !item.meta.notCache)
+  .map((item) => item.name)
 
 const cacheList = computed(() => {
   const arr = tabs.value

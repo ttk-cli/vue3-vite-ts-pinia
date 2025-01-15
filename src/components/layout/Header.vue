@@ -29,8 +29,13 @@ function tabClick(val: number | string = 0, delay = true) {
   }
   setTimeout(
     () => {
+      const parsedUrl = new URL(fullPath, window.location.origin) // 使用当前域名和路径
+      const path = parsedUrl.pathname
+      const query = Object.fromEntries(new URLSearchParams(parsedUrl.search) as any)
+
       router.push({
-        fullPath,
+        path,
+        query,
       })
     },
     delay ? 200 : 0,
