@@ -35,7 +35,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "2.27.1",
     "@commitlint/config-conventional": "19.4.1",
-    "@types/node": "22.5.4",
+    "@types/node": "22.20.2",
     "@types/nprogress": "0.2.0",
     "@unocss/eslint-config": "0.62.2",
     "@unocss/preset-rem-to-px": "0.62.3",
